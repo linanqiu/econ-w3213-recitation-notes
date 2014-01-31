@@ -320,9 +320,9 @@ coordinates {(2,2*e) (2,e^2)};
 
 At $x=2$, we can establish the following equation
 
-\[f(1+1) = f(1) + f \prime (1)(2-1) + e \]
+\[f(1+1) = f(1) + f ' (1)(2-1) + e \] 
 
-Let's look closely at what this says. We are saying that the real value of the function $f(x)$ at $x=2$ can be approximated by starting at $f(1)$, then moving up by a certain amount. By how much? Well, the slope of the tangent line tells us how much we should go up for every unit we move to the right. In this case, we move up by the \textbf{green} dashed line for the amount of \textbf{blue} dashed line that we go across. Hence, for $(2-1)$ units that we go across, we go up by $f \prime (1)(2-1)$ units. However, that leaves us with a little gap (the \textbf{red} dashed line). That is the error term $e$.
+Let's look closely at what this says. We are saying that the real value of the function $f(x)$ at $x=2$ can be approximated by starting at $f(1)$, then moving up by a certain amount. By how much? Well, the slope of the tangent line tells us how much we should go up for every unit we move to the right. In this case, we move up by the \textbf{green} dashed line for the amount of \textbf{blue} dashed line that we go across. Hence, for $(2-1)$ units that we go across, we go up by $f ' (1)(2-1)$ units. However, that leaves us with a little gap (the \textbf{red} dashed line). That is the error term $e$.
 
 \begin{figure}[ht!]
 \centering
@@ -343,13 +343,13 @@ Hence, we are approximating what the real $f(1+1)$ is by using the tangent of th
 
 We can make this more accurate by adding higher derivatives to the equation, hence the term Taylor \textbf{Expansions}. In fact,
 
-\[ f(x)=f(x_{0})+f^{\prime }(x_{0})(x-x_{0})+\frac{1}{2}f^{\prime \prime}(x_{0})(x-x_{0})^{2}+... \]
+\[ f(x)=f(x_{0})+f^{' }(x_{0})(x-x_{0})+\frac{1}{2}f^{' '}(x_{0})(x-x_{0})^{2}+... \]
 
 In general, polynomial of degree $n$.
 
 \[P(x)=\sum_{k=0}^n \frac{f^{(k)}(x_{0})}{k!} (x-x_0)^k \]
 
-In this class, we're usually concerned only with the \textbf{first order approximation}, which is what I've did above (by stopping at $f\prime(x)$ for the expansion).
+In this class, we're usually concerned only with the \textbf{first order approximation}, which is what I've did above (by stopping at $f'(x)$ for the expansion).
 
 \subsection{Application to Economics}
 
@@ -369,7 +369,7 @@ The new utility will then be
 
 We can use a \textbf{first order} Taylor series approximation!
 
-\[ U(w(H*+\epsilon)) - V(H*+\epsilon) = U(wH*) - V(H*) + (U\prime (wH*)w - V\prime(H*))\epsilon + e\]
+\[ U(w(H*+\epsilon)) - V(H*+\epsilon) = U(wH*) - V(H*) + (U' (wH*)w - V'(H*))\epsilon + e\]
 
 That's how we got to this step. The rest of it proceeds as usual and will be explained in the Household portion of the recitation notes.
 
