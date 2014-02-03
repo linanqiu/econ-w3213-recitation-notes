@@ -28,7 +28,7 @@ There should also be a folder called `Student Answers`. Those are answers to que
 
 If you're interested in compiling the LaTeX files itself, here's what you need
 
-- `dominatrix` by @kenlimmj. Excellent LaTeX drop-in package that solves most of the problems you'll ever have
-- TexLive 2013 and above, with `pgfplot` updated to the latest version. Otherwise, the compiler throws errors for the `tikzpicture` graphs.
+- [dominatrix](https://github.com/kenlimmj/dominatrix) by [kenlimmj](https://github.com/kenlimmj/). Excellent LaTeX drop-in package that solves most of the problems you'll ever have
+- [TexLive](http://www.tug.org/texlive/) and above, with `pgfplot` updated to the latest version. Otherwise, the compiler throws errors for the `tikzpicture` graphs.
 
-That's really all. `dominatrix` forces you to compile using XeTeX in case you insist on doing otherwise.
+That's really all. Dominatrix forces you to compile using XeTeX in case you insist on doing otherwise.
