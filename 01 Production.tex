@@ -132,16 +132,135 @@ We have just shown that if I increase both $K$ and $L$ by $c$, then $Y$ gets inc
 This is what we mean by \textbf{Constant Returns to Scale}
 
 \section{Firms' Optimal Choice}
+The question we have now is, "How much labor and capital should a firm use?"
+
+To do this, we assume that the firm \textbf{maximizes profits}. Then we find the \textbf{optimal choice of capital} and \textbf{optimal choice of labor} that maximizes profit.
+
+\textbf{Profit is revenue minus cost}. No shit. Expressed formally, profit $\pi$ is
+
+\begin{align*}
+\pi &= Y - rK - wL \\
+&= \bar{A}K^{\alpha}L^{1-\alpha} - rK - wL
+\end{align*}
+
+Now our job is to help a firm maximize its profit.
 
 \subsection{Optimal Choice of Capital}
+We want to find the optimum level of capital $K$ and labor $L$ inputs that the firm uses. We do that one at a time.
+
+For the optimal level of capital, we simply partially differentiate the profit function with respect to $K$ and set to $0$.
+
+\begin{align*}
+\frac{\partial \pi}{\partial K} = \bar{A} \alpha K^{\alpha - 1}L^{1-\alpha} - r &= 0\\
+\bar{A} \alpha K^{\alpha - 1}L^{1-\alpha} &= r
+\end{align*}
+
+Now we know that the firm must set \emph{something} to be equal to rent $r$ in order to use the optimum amount of capital. What is that \emph{something}? Let's find out.
+
+Let's partial differentiate output $Y$ with respect to $K$.
+
+\[ \frac{\partial Y}{\partial K} = \bar{A} \alpha K^{\alpha - 1}L^{1-\alpha} \]
+
+Does this look familiar? Why of course it does! It's the animal on the LHS of the rent equation. Since this is the partial derivative of $Y$ with respect to $K$, this is the \textbf{Marginal Product of Capital (MPK)} -- the extra amount of output that is produced per unit of extra capital when a small amount of capital is added, \emph{holding all other inputs constant}.
+
+Hence, in order to find the optimum level of capital, all the firm needs to do is to set \textbf{rent} equal to \textbf{Marginal Product of Capital}
+
+\begin{align*}
+\bar{A} \alpha K^{\alpha - 1}L^{1-\alpha} &= r \\
+MPK &= r
+\end{align*}
+
+That makes intuitive sense -- the additional benefit from one additional unit of capital should equal the additional cost incurred. Remember \emph{marginal benefit equals marginal cost}? In this case, MPK is the marginal benefit. $r$ is the marginal cost.
 
 \subsection{Optimal Choice of Labor}
+We can do the same for labor.
+
+\begin{align*}
+\frac{\partial \pi}{\partial L} = \bar{A} \alpha K^{\alpha}(1-\alpha)L^{-\alpha} - w &= 0\\
+\bar{A} \alpha K^{\alpha}(1-\alpha)L^{-\alpha} &= w\\
+\end{align*}
+
+Again, we show that the LHS of the equation is the \textbf{Marginal Product of Labor (MPL)}
+
+\[ \frac{\partial Y}{\partial L} = \bar{A} \alpha K^{\alpha}(1-\alpha)L^{-\alpha} \]
+
+Then in that case,
+
+\begin{align*}
+\bar{A} \alpha K^{\alpha}(1-\alpha)L^{-\alpha} &= w\\
+MPL &= w
+\end{align*}
+
+Again, this makes intuitive sense. Marginal benefit of labor should equal marginal cost right?
+
+\subsection{Curves}
+The demand curve in capital market and labor markets then look like this
+
+\begin{figure}[ht!]
+\begin{subfigure}[b]{0.5\textwidth}
+\begin{tikzpicture}[scale=0.85]
+\begin{axis}[xlabel={Capital $K$},ylabel={Rent $r$}]
+\addplot[domain=0:10,black]
+{(x^(1/3-1))};
+%\addplot[domain=0:1000,black]
+%{(x^(1/3))};
+\end{axis}
+\end{tikzpicture}
+\caption{Plot of $r$ against $K$ holding $L$ constant}
+\end{subfigure}
+\hspace{2ex}
+\begin{subfigure}[b]{0.5\textwidth}
+\begin{tikzpicture}[scale=0.85]
+\begin{axis}[xlabel={Labor $L$},ylabel={Wages $w$}]
+%\addplot[domain=0:1000,black]
+%{(x^(2/3))};
+\addplot[domain=0:10,blue]
+{(x^(-1/3))};
+\end{axis}
+\end{tikzpicture}
+\caption{Plot of $w$ against $L$ holding $K$ constant}
+\end{subfigure}
+\caption{Y Increasing in K and L at a Declining Rate}
+\end{figure}
+
+These curves are evident from the equations we derived in the two sections above. Try them!
 
 \section{Share of Output}
 
+To find out how much we are paying laborers, we simply \textbf{multiply wages per worker with number of workers}. Why? If you pay each worker $w$ dollars, and there are $L$ workers, then they earned $wL$ dollars in total.
 
+The share of GDP that goes to workers is then
 
+\begin{align*}
+wL &= \bar{A}K^{\alpha}(1-\alpha)L^{-\alpha} * L\\
+&= (1-\alpha)\bar{A}K^{\alpha}L^{1-\alpha} \\
+&= (1-\alpha)Y
+\end{align*}
 
+So labor $L$ eats up $(1-\alpha)$ of Y. Set $\alpha = \frac{1}{3}$ and we get the $wL = \frac{2}{3}Y$ statement that \jon used.
 
+Similarly, for capital,
+
+\begin{align*}
+rK &= \bar{A}(\alpha)K^{\alpha-1}L^{1-\alpha} * K\\
+&= (\alpha)\bar{A}K^{\alpha}L^{1-\alpha} \\
+&= (\alpha)Y
+\end{align*}
+
+Capital $K$ eats up $\alpha$ of Y. Set $\alpha = \frac{1}{3}$ and we see that $rK = \frac{1}{3}Y$. 
+
+If $Y = rK + wL$, then firms are earning zero (normal) profits. Why so? Because we assumed \textbf{perfect competition}, and under perfect competition firms earn only normal profits!
+
+\section{Output Per Capita}
+
+In comparing different countries, we rarely compare GDP in its entirety. Instead, we're more concerned about \textbf{GDP per capita} since that gives us a better idea of how much a person in that country can consume. After all, there's not too much point in having a country with a very high GDP but an even higher population -- a single person in that country still remains poor.
+
+To analyze this, we define \textbf{output per capita} as $y = \frac{Y}{L}$, and \textbf{capital per capita} as $k = \frac{K}{L}$
+
+Then,
+
+\[ y = \frac{Y}{L} = \frac{\bar{A}K^{\alpha}L^{1-\alpha}}{L} = \bar{A}K^{\alpha} \]
+
+We find that output per capita is determined by two factors -- productivity and capital per person. This becomes a model that we can test empirically.
 
 \end{document}

@@ -1,0 +1,71 @@
+\documentclass[11pt]{scrartcl}
+\usepackage{dominatrix}
+\usepackage{colortbl}
+\usepackage{pgfplots}
+\newcommand{\jon}{Jón }
+\pgfplotsset{compat=1.9}
+\renewcommand\thesubsection{\alph{subsection}}
+\definecolor{light-gray}{gray}{0.75}
+\title{Answer to Question on Labor Supply and Taxes}
+\subject{ECON W3213 Spring 2014 \jon Steinsson}
+\author{Linan Qiu, lq2137}
+\begin{document}
+\maketitle
+
+\section{Question}
+
+Derivation of:
+
+\[\frac{V'(H)}{U'(C)} = w \frac{1- \tau_l}{1+\tau_c}\] 
+
+From \textbf{Lecture Notes 4}
+
+\section{Answer}
+
+We have a utility function
+
+\[U(C) - V(H)\]
+
+The budget constraint (without taxes) used to be this
+
+\[C = wH\]
+
+However, with taxes, the amount of money we spend on consumption is however much we buy $C$ plus the consumption tax on the amount that we bought $\tau_c C$. That makes the new LHS $(1+\tau_c)C$
+
+The still get $wH$ as income, but we get $\tau_l wH$ taxed away. Our disposable income then becomes $(1-\tau_l)wH$ 
+
+Then our new budget constraint (with taxes) is
+
+\[(1+\tau_c)C = (1-\tau_l)wH\]
+
+Rearranging,
+
+\[ C = wH \frac{1+\tau_c}{1-\tau_l} \]
+
+Substituting back into the original utility function (since that's how we solve constrained optimization without using Lagrangians), the utility function becomes
+
+\[ U \left( wH \frac{1+\tau_c}{1-\tau_l} \right) - V(H) \]
+
+Differentiating with respect to $H$ and setting to $0$, we get
+
+\begin{align*}
+\left(w\frac{1+\tau_c}{1-\tau_l}\right) U' \left( wH \frac{1+\tau_c}{1-\tau_l} \right) - V'(H) &= 0 \\
+\left(w\frac{1+\tau_c}{1-\tau_l} \right) U' (C) - V'(H) &= 0 \\
+\frac{V'(H)}{U'(C)} &= w\frac{1-\tau_l}{1+\tau_c}
+\end{align*}
+
+We have established a relationship, just like we did with the non-tax case, between $H$ and $w$. This shows how much number of hours worked $H$ will change if we vary $w$. This is then our \textbf{labor supply post taxes}
+
+\jon then proceeded to use a specific utility function
+
+\[\log{C} - \psi \frac{H^{1+\eta}}{1+\eta} \]
+
+
+
+
+
+
+
+
+
+\end{document}
