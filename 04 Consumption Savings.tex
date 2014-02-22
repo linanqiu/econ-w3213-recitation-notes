@@ -52,8 +52,7 @@ We can combine the two equations to form our constraint
 
 \[ C_1 + \frac{C_2}{1+R} = Y_1 + \frac{Y_2}{1+R} \]
 
-On the left, we have the present value of total consumption throughout all periods. On the right, it's the present value of income throughout all periods. For a detailed explanation of present value, look at the \href{https://github.com/linanqiu/econ-w3213-recitation-notes/blob/master/00\%20Mathematics\%20Crash\%20Course.pdf?raw=true
-}{00 Mathematics Crash Course.pdf} notes.
+On the left, we have the present value of total consumption throughout all periods. On the right, it's the present value of income throughout all periods. For a detailed explanation of present value, look at the \texttt{00 Mathematics Crash Course.pdf} notes.
 
 \subsection{Maximizing Utility}
 
@@ -203,7 +202,7 @@ How exactly will you be able to achieve that? You borrow and you save (and pay b
 \begin{figure}[H]
 \centering
 \begin{tikzpicture}
-\begin{axis}[ylabel = {Income $Y$ and Consumption $C$}, xlabel = {Years $t$}, xmin = 0, xmax = 80,ymin = 0, ymax = 80, scale=1.5]
+\begin{axis}[ylabel = {Income $Y$ and Consumption $C$}, xlabel = {Years $t$}, xmin = 0, xmax = 80,ymin = 0, ymax = 80, scale=1.3]
 
 \addplot[black, domain=0:80]
 coordinates{(0,10) (20,10) (50, 80) (65,10) (80,10)};
@@ -225,6 +224,7 @@ coordinates{(0,0)} node at (axis cs: 45, 50) {Savings} node at (axis cs: 10, 20)
 
 \end{axis}
 \end{tikzpicture}
+\caption{Borrowing, Saving and Dissavings}
 \end{figure}
 
 However, in reality, that doesn't happen because we have borrowing constraints.
