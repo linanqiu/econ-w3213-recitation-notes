@@ -13,7 +13,7 @@
 \maketitle
 
 \begin{abstract}
-This set of recitation notes covers \textbf{Partial Derivatives}, \textbf{Taylor Series Approximation}, and \textbf{Optimization}. More content may be added as more mathematical techniques are employed during the course of this lesson. This is \textbf{not} a substitute for a proper mathematics education. That being said, we do want to apply all that intellectual shebang to something more than 2D curves and 3D planes right? Attaboy.
+This set of recitation notes covers \textbf{Partial Derivatives}, \textbf{Taylor Series Approximation}, \textbf{Optimization}, and \textbf{Present Value}. More content may be added as more mathematical techniques are employed during the course of this lesson. This is \textbf{not} a substitute for a proper mathematics education. That being said, we do want to apply all that intellectual shebang to something more than 2D curves and 3D planes right? Attaboy.
 \end{abstract}
 
 \section{Partial Derivatives}
@@ -372,5 +372,55 @@ We can use a \textbf{first order} Taylor series approximation!
 \[ U(w(H*+\epsilon)) - V(H*+\epsilon) = U(wH*) - V(H*) + (U' (wH*)w - V'(H*))\epsilon + e\]
 
 That's how we got to this step. The rest of it proceeds as usual and will be explained in the Household portion of the recitation notes.
+
+\section{Present Value}
+
+\subsection{What is Present Value?}
+
+Say I borrow \$1,000 from you today and promise to return it a year later. When I do return it to you one year later, you're probably going to want more than \$1,000. Why?
+
+\begin{itemize}
+\item You could have had the \$1,000 and consumed \$1,000 worth of goods today, instead of waiting one year to consume them when I return the money. You need compensation for that \textbf{delayed consumption}.
+\item You could have invested the \$1,000 today and earned around \$10 worth of interest. Hence, you want me to make up for that \textbf{opportunity cost}. Hence, you'd charge me \$1,010.
+\end{itemize}
+
+These are basically the two ways of communicating the same idea. You'd charge me \textbf{interest}.
+
+Say I return it to you in 1 year. You'd make me pay you back \$1000$(1+R)$, where $R$ is the interest rate. If I return it to you in 2 years, I'd pay you \$1000$(1+R)^2$ and so on.
+
+Let's use this concept to answer a similar question: If I give you \$1,000 5 years into the future, how much is it worth?
+
+Let's call the present value $x$. I should be able to invest \$$x$ for 5 years such that it produces \$1,000. That's how much \$1000 5 years in the future is worth now. Hence,
+
+\begin{align*}
+x(1+R)^5 &= 1000 \\
+x &= \frac{1000}{(1+R)^5}
+\end{align*}
+
+This makes sense because I can invest \$$x$ at interest rate $R$ and get \$$1000$ in 5 years. So right now, it is only worth \$$x$ to me, which is lower than \$1,000. After all, I am delaying consumption or forgoing possible investment opportunities.
+
+We can generalize this into
+
+\[ PV_{y,n} = \frac{y}{(1+R)^n} \]
+
+where $y$ is an amount in the future, and $n$ is the number of years into the future.
+
+\subsection{Application to Economics}
+Let's say you attempt to invest in a fund that pays you back \$2,000 every year for 5 years. Let's set interest rate at 3\%. How much is the "fair price" that you're willing to pay (assuming that the fund doesn't rip you off). 
+
+We can use the idea of present value to calculate that. The present value of \$2,000 every year for 5 years is
+
+\begin{align*}
+PV &= \frac{2000}{(1+0.03)^1} + \frac{2000}{(1+0.03)^2} + \frac{2000}{(1+0.03)^3} + \frac{2000}{(1+0.03)^4} + \frac{2000}{(1+0.03)^5} \\
+&= 9159
+\end{align*}
+
+Hence, you shouldn't simply pay \$10,000, because you don't get all the payment now. You only get some in the future, and you should account for that.
+
+We apply this concept in \textbf{Consumption and Savings}.
+
+\[C_1 + \frac{C_2}{(1+R)} = Y_1 + \frac{Y_2}{(1+R)} \]
+
+Here, we are comparing the present value of consumption with the present value of earnings.
 
 \end{document}
