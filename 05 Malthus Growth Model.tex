@@ -1,0 +1,377 @@
+\documentclass[11pt]{scrartcl}
+\usepackage{dominatrix}
+
+\usepackage{colortbl}
+\usepackage{pgfplots}
+\newcommand{\jon}{Jón }
+\newcommand{\ve}{\varepsilon}
+\pgfplotsset{compat=1.9}
+\definecolor{light-gray}{gray}{0.75}
+\title{Malthus Growth Model}
+\subject{ECON W3213 Spring 2014 \jon Steinsson}
+\author{Linan Qiu, lq2137}
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+This set of recitation notes covers the \textbf{Malthus Growth Model } This is in no way a substitute for attending lectures, but just in case you dozed off or checked your boyfriend's Facebook page while \jon was working Calculus magic on the board, this set of notes may save you.
+\end{abstract}
+
+\section{Introduction to Growth Models}
+
+In this set of notes and the next, you will be learning about growth models. Essentially, they answer the question
+
+\begin{quote}
+What makes an economy grow?
+\end{quote}
+
+And we're not talking about little movements (that economists call "cyclical"). Rather, we're talking about long run trajectories that last tens or even hundreds of years.
+
+Do understand the characteristics of these models. What do I mean? Each model has its inherent assumptions on production and growth. Identify them:
+
+\begin{itemize}
+\item What is the key factor of production?
+\item What is the production dependent on?
+\item What happens in the long run?
+\item What happens during shocks both temporary and permanent?
+\end{itemize}
+
+This provides a good way for you to contrast the different models and to organize your thoughts. Otherwise, you'd be lost in a sea of information. Not even the CC swim test can help you with that.
+
+One last thing -- we are always talking about real income or real production in these models. We don't factor in inflation at all. In fact, you can think of production in terms of perhaps \textbf{Gatorade} (since \jon loves drinking it so much). We will include monetary effects much later on.
+
+\section{Malthus Model}
+
+The characteristics of the Malthus Model are
+
+\begin{itemize}
+\item Labor is the key factor of production
+\item Production is dependent on labor (or population), and so are wages
+\item Population always stays constant in the long run, with everyone earning subsistence wages
+\item Temporary shocks do nothing to the steady state. Permanent changes shift the steady state.
+\end{itemize}
+
+Let's see how we can arrive at these conclusions.
+
+\subsection{Production Function}
+
+The production function is assumed to be
+
+\[Y_t = A_tD^\alpha L_t^{1-\alpha}\]
+
+Where 
+
+\begin{itemize}
+\item $Y_t$ is output at time $t$
+\item $A_t$ is productivity at $t$
+\item $D$ is land, assumed to be constant over time
+\item $L_t$ is labor at time $t$
+\item $\alpha$ is a constant less than 1. In fact, you can tell that this is a pretty standard Cobb-Douglas function.
+\end{itemize}
+
+Convince yourself that this function exhibits
+
+\begin{enumerate}
+\item Constant returns to scale
+\item Diminishing returns to labor
+\end{enumerate}
+
+Try it. It's really not that hard.
+
+\subsection{Labor Demand and Supply}
+
+The Malthus model focuses on labor. Let's derive the labor demand and supply then.
+
+Remember that firms are always the ones demanding labor. They will always pay you up to your marginal product of labor. \textbf{Labor Demand} is hence
+
+\[\mathrm{MPL} = \frac{\partial Y_t}{\partial L} = (1-\alpha)A_t\left(\frac{D}{L_t}\right)^\alpha = w_t\]
+
+We assume that labor supply is simply equal number of hours each person works times the population size. We also assume that number of hours worked for everyone is the same. 
+
+\textbf{Labor Supply} is 
+
+\[L_t = HN_t\]
+
+Where
+
+\begin{itemize}
+\item $H$ is the number of hours worked per person
+\item $N_t$ is the population size
+\end{itemize}
+
+\subsection{Malthus Theory for Population Growth}
+
+Malthus postulates that population growth is related to wage growth. Hence, we have the \textbf{population growth equation}:
+
+\[ \frac{N_{t+1}}{N_t} = \left(\frac{w_t}{w_s}\right)^\gamma \xi_t \]
+
+Where
+
+\begin{itemize}
+\item $w_s$ is subsistence wage
+\item $\gamma$ is a constant where $0 < \gamma < 1$
+\item $\xi_t$ represents exogenous shocks. In other words, if the Vesuvius eruption happens at $t=79$, $\xi_{79}$ will be very small. However, it reverts back to normal ($\xi_t = 1$) at $t=80$. 
+\end{itemize}
+
+\subsection{Population Dynamics}
+
+Let's find the equilibrium of the labor market by equating labor supply and demand
+
+\[w_t = (1-\alpha)A_t\left(\frac{D}{HN_t}\right)^\alpha = \phi A_t \frac{1}{N_t^\alpha} \]
+
+Where $\phi = (1-\alpha)\left(\frac{D}{H}\right)^\alpha$ is simply a grouping of constants.
+
+Now let's throw this $w_t$ into the population growth equation
+
+\begin{align*}
+\frac{N_{t+1}}{N_t} &= \left(\frac{w_t}{w_s}\right)^\gamma \xi_t \\
+&= \left(\frac{\phi A_tN_t^{-\alpha}}{w_s}\right)^\gamma \xi_t \\
+N_{t+1} &= \left(\frac{\phi A_t}{w_s}\right)^\gamma N_t^{1-\alpha \gamma} \xi_t
+\end{align*}
+
+Now let's plot this little monster. It's not that hard. Just find your $y$ and $x$ axis variables.
+
+\[ \underbrace{N_{t+1}}_\mathrm{y-variable} = \left(\frac{\phi A_t}{w_s}\right)^\gamma \underbrace{N_t^{1-\alpha \gamma}}_\mathrm{x-variable} \xi_t \]
+
+Since $1-\alpha \gamma < 1$ (remember what values $\alpha$ and $\gamma$ took?), this is simply going to look like a $y = \sqrt{x}$ graph, except that the exponent may be a little different (but the shape still remains the shape). 
+
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}
+\begin{axis}[ylabel={$N_{t+1}$}, xlabel={$N_t$}, scale=1.75, yticklabels={,,}, xticklabels={,,}, xmin = 0, xmax = 2.5]
+\addplot[domain=0:2, black, samples=1000]
+{x^(0.5)} node at (axis cs: 2.2, 1.4) {$N_{t+1}$};
+\addplot[domain=0:2, black, dashed]
+{x} node at (axis cs: 2.2, 2) {$N_{t+1} = N_t$};
+\end{axis}
+\end{tikzpicture}
+\caption{Plot of $N_{t+1}$ against $N_t$}
+\end{figure}
+
+Now think intuitively. What does this graph tell us? This graph gives us the population at the next time period for a current level of population. A natural question we would then want to ask is: \emph{is the population in the next period going to be higher than what we have right now?}
+
+To answer that question, we draw the line $N_{t+1} = N_t$ to help us. Now any region above this dotted line is a situation where the population in the next period, $N_{t+1}$, is higher than what our current population $N_t$ is. 
+
+Hence, let's say our current population at $t=0$ is at the point indicated
+
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}
+\begin{axis}[ylabel={$N_{t+1}$}, xlabel={$N_t$}, scale=1.75, yticklabels={,,}, xticklabels={,,}, xmin = 0, xmax = 2.5]
+\addplot[domain=0:2, black, samples=1000]
+{x^(0.5)} node at (axis cs: 2.2, 1.4) {$N_{t+1}$};
+\addplot[domain=0:2, black, dashed]
+{x} node at (axis cs: 2.2, 2) {$N_{t+1} = N_t$};
+\addplot[mark=*, black, mark size=3pt, domain=0:2, dashed]
+coordinates {(0.5,0.707) (0.5, 0.5) (0.5,0)} node at (axis cs: 0.6, 0) {$N_0$} node at (axis cs: 0.6, 0.707) {$N_1$};
+\addplot[dashed, line width = 2, black]
+coordinates {(0.5, 0.707) (0.5, 0.5)};
+\end{axis}
+\end{tikzpicture}
+\caption{Plot of $N_{t+1}$ against $N_t$}
+\end{figure}
+
+If population were to be the same as $N_0$ in the next time period, then we'd be on the dotted line. However, the population growth curve shows us that the population $N_1$ at the next period is higher than that (by precisely the height of the thick dotted line). Hence, there will be population growth from $N_0$ to $N_1$. 
+
+Since our population increases by $N_1 - N_0$, which is the vertical distance indicated by the thick dashed line, this is what happens in the next period.
+
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}
+\begin{axis}[ylabel={$N_{t+1}$}, xlabel={$N_t$}, scale=1.75, yticklabels={,,}, xticklabels={,,}, xmin = 0, xmax = 2.5]
+\addplot[domain=0:2, black, samples=1000]
+{x^(0.5)} node at (axis cs: 2.2, 1.4) {$N_{t+1}$};
+\addplot[domain=0:2, black, dashed]
+{x} node at (axis cs: 2.2, 2) {$N_{t+1} = N_t$};
+\addplot[mark=*, black, mark size=3pt, domain=0:2, dashed]
+coordinates {(0.707, 0) (0.707, 0.707) (0.5,0.707) (0.5, 0.5) (0.5,0) } node at (axis cs: 0.8, 0) {$N_1$} node at (axis cs: 0.8, 0.707) {$N_1$};
+\addplot[dashed, line width = 2, black]
+coordinates {(0.5, 0.707) (0.707, 0.707)};
+\end{axis}
+\end{tikzpicture}
+\caption{Plot of $N_{t+1}$ against $N_t$}
+\end{figure}
+
+We arrive at $N_1$ on the x axis. The rightward shift indicated by the thick dashed line is exactly equal to the thick dashed line in figure 2 (prove to yourself that it's the same. After all, $N_{t+1} = N_t$ is a $45^{\circ}$ line).
+
+Again at $N_1$, we find that $N_2$ is going to be higher than $N_1$ and there is population growth. 
+
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}
+\begin{axis}[ylabel={$N_{t+1}$}, xlabel={$N_t$}, scale=1.75, yticklabels={,,}, xticklabels={,,}, xmin = 0, xmax = 2.5]
+\addplot[domain=0:2, black, samples=1000]
+{x^(0.5)} node at (axis cs: 2.2, 1.4) {$N_{t+1}$};
+\addplot[domain=0:2, black, dashed]
+{x} node at (axis cs: 2.2, 2) {$N_{t+1} = N_t$};
+\addplot[mark=*, black, mark size=3pt, domain=0:2, dashed]
+coordinates {(0.707, 0) (0.707, 0.707) (0.5,0.707) (0.5, 0.5) (0.5,0) };
+\addplot[mark=*, black, mark size=3pt, domain=0:2, dashed]
+coordinates {(0.707, 0) (0.707, 0.707) (0.707,0.840)} node at (axis cs: 0.8, 0) {$N_1$} node at (axis cs: 0.8, 0.840) {$N_2$};
+\addplot[dashed, line width = 2, black]
+coordinates {(0.707, 0.707) (0.707, 0.840)};
+\end{axis}
+\end{tikzpicture}
+\caption{Plot of $N_{t+1}$ against $N_t$}
+\end{figure}
+
+We can continue this stepwise movement upwards. The same cycle happens again. In fact, we can draw a ladder-ish movement until we reach the point where the two curves intersect.
+
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}
+\begin{axis}[ylabel={$N_{t+1}$}, xlabel={$N_t$}, scale=1.75, yticklabels={,,}, xticklabels={,,}, xmin = 0, xmax = 2.5]
+\addplot[domain=0:2, black, samples=1000]
+{x^(0.5)} node at (axis cs: 2.2, 1.4) {$N_{t+1}$};
+\addplot[domain=0:2, black, dashed]
+{x} node at (axis cs: 2.2, 2) {$N_{t+1} = N_t$};
+\addplot[blue, domain=0:2, dashed]
+coordinates {(0.5, 0) (0.5, 0.707106781) (0.707106781, 0.707106781) (0.707106781, 0.840896415) (0.840896415, 0.840896415) (0.840896415, 0.917004043) (0.917004043, 0.917004043) (0.917004043, 0.957603281) (0.957603281, 0.957603281) (0.957603281, 0.978572062) (0.978572062, 0.978572062) (0.978572062, 0.989228013) (0.989228013, 0.989228013) (0.989228013, 0.994599423) (0.994599423, 0.994599423) (0.994599423, 0.997296056) (0.997296056, 0.997296056)};
+\addplot[black, mark=*, mark size=3pt, domain=0:2, dashed, black]
+coordinates {(1,1) (1,0)} node at (axis cs: 1.1, 0) {$N^*$};
+\end{axis}
+\end{tikzpicture}
+\caption{Plot of $N_{t+1}$ against $N_t$}
+\end{figure}
+
+When $N_{t+1} = N_t$, in other words at $N^*$, population goes into what we call a "steady state", since it doesn't change anymore. This also works for any population above $N^*$. 
+
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}
+\begin{axis}[ylabel={$N_{t+1}$}, xlabel={$N_t$}, scale=1.75, yticklabels={,,}, xticklabels={,,}, xmin = 0, xmax = 2.5]
+\addplot[domain=0:2, black, samples=1000]
+{x^(0.5)} node at (axis cs: 2.2, 1.4) {$N_{t+1}$};
+\addplot[domain=0:2, black, dashed]
+{x} node at (axis cs: 2.2, 2) {$N_{t+1} = N_t$};
+\addplot[blue, domain=0:2, dashed]
+coordinates {(0.5, 0) (0.5, 0.707106781) (0.707106781, 0.707106781) (0.707106781, 0.840896415) (0.840896415, 0.840896415) (0.840896415, 0.917004043) (0.917004043, 0.917004043) (0.917004043, 0.957603281) (0.957603281, 0.957603281) (0.957603281, 0.978572062) (0.978572062, 0.978572062) (0.978572062, 0.989228013) (0.989228013, 0.989228013) (0.989228013, 0.994599423) (0.994599423, 0.994599423) (0.994599423, 0.997296056) (0.997296056, 0.997296056)};
+\addplot[blue, domain=0:2, dashed]
+coordinates {(1.5, 0) (1.5, 1.224744871) (1.224744871, 1.224744871) (1.224744871, 1.10668192) (1.10668192, 1.10668192) (1.10668192, 1.051989506) (1.051989506, 1.051989506) (1.051989506, 1.025665396) (1.025665396, 1.025665396) (1.025665396, 1.012751399) (1.012751399, 1.012751399) (1.012751399, 1.006355503) (1.006355503, 1.006355503) (1.006355503, 1.003172719) (1.003172719, 1.003172719) (1.003172719, 1.001585103) (1.001585103, 1.001585103)};
+\addplot[blue, domain=0:2, dashed]
+coordinates {(1.5, 1.2247) (1.5, 1.5)};
+\addplot[black, mark=*, mark size=3pt, domain=0:2, dashed, black]
+coordinates {(1,1) (1,0)} node at (axis cs: 1.1, 0) {$\bar{N}$};
+\end{axis}
+\end{tikzpicture}
+\caption{Plot of $N_{t+1}$ against $N_t$}
+\end{figure}
+
+In other words, we conclude that in the long run, population will always be at the steady state $N*$ in the long run. We can solve for this $\bar{N}$.
+
+$N*$ is when $N_{t+1} = N_t$
+
+Hence, assuming $\xi_t = 1$
+
+\begin{align*}
+\bar{N} &= \left(\frac{\phi A_t}{w_s}\right)^\gamma \bar{N}^{1-\alpha \gamma}\\
+\bar{N} &= \left(\frac{\phi A_t}{w_s}\right)^\frac{1}{\alpha} 
+\end{align*}
+
+\subsection{Wage Dynamics}
+
+This has implications on wages. Since wages are 
+
+\[w_t = \phi A_t \frac{1}{N_t^\alpha} \]
+
+Then at steady state $\bar{N}$
+
+\[\bar{w} = \phi A_t \frac{1}{\bar{N}^\alpha} \]
+
+Wait a minute. This looks a little familiar doesn't it? In fact, let's take the steady state population equation and switch the subject to $w_s$ subsistence wages
+
+\begin{align*}
+\bar{N} &= \left(\frac{\phi A_t}{w_s}\right)^\frac{1}{\alpha} \\
+w_s &= \phi A_t \frac{1}{\bar{N}^\alpha} = \bar{w}
+\end{align*}
+
+This means that the only steady state wage is subsistence wage. This shouldn't come as a surprise at all. After all,
+
+\[ \frac{N_{t+1}}{N_t} = \left(\frac{w_t}{w_s}\right)^\gamma \xi_t \]
+
+If $N_{t+1} = N_t = \bar{N}$, then $w_t = w_s = \bar{w}$. Now isn't this pretty sad? All we get to earn are subsistence wages.
+
+\subsection{Shocks}
+
+There are two different kinds of shocks. 
+
+\begin{itemize}
+\item Temporary shocks (eg. disease)
+\item Permanent shock (eg. the discovery and synthesis of penicillin)
+\end{itemize}
+
+\subsubsection{Temporary Shocks}
+
+In a temporary shock, say a disease, $\xi$ decreases for that particular period, then goes back to 1 for all other periods. 
+
+In other words, the exogenous parameters, $D$, $A$ did not shift. Hence, the $N_{t+1}$ curve didn't shift at all and the steady state population is still the same.
+
+The same happens if there was a sudden baby boom or influx of new immigrants. We'd just go back down to the original steady state.
+
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}
+\begin{axis}[ylabel={$N_{t+1}$}, xlabel={$N_t$}, scale=1.75, yticklabels={,,}, xticklabels={,,}, xmin = 0, xmax = 2.5]
+\addplot[domain=0:2, black, samples=1000]
+{x^(0.5)} node at (axis cs: 2.2, 1.4) {$N_{t+1}$};
+\addplot[domain=0:2, black, dashed]
+{x} node at (axis cs: 2.2, 2) {$N_{t+1} = N_t$};
+\addplot[blue, domain=0:2, dashed]
+coordinates {(0.5, 0) (0.5, 0.707106781) (0.707106781, 0.707106781) (0.707106781, 0.840896415) (0.840896415, 0.840896415) (0.840896415, 0.917004043) (0.917004043, 0.917004043) (0.917004043, 0.957603281) (0.957603281, 0.957603281) (0.957603281, 0.978572062) (0.978572062, 0.978572062) (0.978572062, 0.989228013) (0.989228013, 0.989228013) (0.989228013, 0.994599423) (0.994599423, 0.994599423) (0.994599423, 0.997296056) (0.997296056, 0.997296056)};
+\addplot[blue, domain=0:2, dashed]
+coordinates {(1.5, 0) (1.5, 1.224744871) (1.224744871, 1.224744871) (1.224744871, 1.10668192) (1.10668192, 1.10668192) (1.10668192, 1.051989506) (1.051989506, 1.051989506) (1.051989506, 1.025665396) (1.025665396, 1.025665396) (1.025665396, 1.012751399) (1.012751399, 1.012751399) (1.012751399, 1.006355503) (1.006355503, 1.006355503) (1.006355503, 1.003172719) (1.003172719, 1.003172719) (1.003172719, 1.001585103) (1.001585103, 1.001585103)};
+\addplot[blue, domain=0:2, dashed]
+coordinates {(1.5, 1.2247) (1.5, 1.5)};
+\addplot[black, mark=*, mark size=3pt, domain=0:2, dashed, black]
+coordinates {(1,1) (1,0)} node at (axis cs: 1.1, 0) {$\bar{N}$} node at (axis cs: 1.6, 0) {$N_{\mathrm{Immigrants}}$} node at (axis cs: 0.6, 0) {$N_{\mathrm{Disease}}$};
+\end{axis}
+\end{tikzpicture}
+\caption{Plot of $N_{t+1}$ against $N_t$}
+\end{figure}
+
+Steady state wages (ie. subsistence wages) don't change as well.
+
+\subsubsection{Permanent Shock}
+
+A permanent shock changes the exogenous variables. Examples include a new technology that increases $A$, discovery of new land that increases $D$ and so on.
+
+We then move up to an entirely different curve.
+
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}
+\begin{axis}[ylabel={$N_{t+1}$}, xlabel={$N_t$}, scale=1.75, yticklabels={,,}, xticklabels={,,}, xmin = 0, xmax = 2.5]
+\addplot[domain=0:2, black, samples=1000]
+{x^(0.5)} node at (axis cs: 2.2, 1.4) {$N_{0,t+1}$};
+\addplot[domain=0:2, blue, samples=1000]
+{1.2*x^(0.5)} node at (axis cs: 2.2, 1.69) {$N_{1,t+1}$};
+\addplot[domain=0:2, black, dashed]
+{x} node at (axis cs: 2.2, 2) {$N_{t+1} = N_t$};
+
+\addplot[blue, domain=0:2, dashed]
+coordinates {(1,1) (1, 1.2) (1.2, 1.2) (1.2, 1.314534138) (1.314534138, 1.314534138) (1.314534138, 1.375837621) (1.375837621, 1.375837621) (1.375837621, 1.407553258) (1.407553258, 1.407553258) (1.407553258, 1.423684197) (1.423684197, 1.423684197) (1.423684197, 1.431818858) (1.431818858, 1.431818858) (1.431818858, 1.435903603) (1.435903603, 1.435903603) (1.435903603, 1.437950343) (1.437950343, 1.437950343)};
+%\addplot[blue, domain=0:2, dashed]
+%coordinates {(1.5, 0) (1.5, 1.224744871) (1.224744871, 1.224744871) (1.224744871, 1.10668192) (1.10668192, 1.10668192) (1.10668192, 1.051989506) (1.051989506, 1.051989506) (1.051989506, 1.025665396) (1.025665396, 1.025665396) (1.025665396, 1.012751399) (1.012751399, 1.012751399) (1.012751399, 1.006355503) (1.006355503, 1.006355503) (1.006355503, 1.003172719) (1.003172719, 1.003172719) (1.003172719, 1.001585103) (1.001585103, 1.001585103)};
+%\addplot[blue, domain=0:2, dashed]
+%coordinates {(1.5, 1.2247) (1.5, 1.5)};
+\addplot[black, mark=*, mark size=3pt, domain=0:2, dashed, black]
+coordinates {(1,1) (1,0)} node at (axis cs: 1.1, 0) {$\bar{N}_0$};
+\addplot[black, mark=*, mark size=3pt, domain=0:2, dashed, black]
+coordinates {(1.44,1.44) (1.44,0)} node at (axis cs: 1.54, 0) {$\bar{N}_1$};
+\end{axis}
+\end{tikzpicture}
+\caption{Plot of $N_{t+1}$ against $N_t$}
+\end{figure}
+
+We will then move to a new steady state $\bar{N}_1$. Mathematically, we can solve for the new steady state using the equation for steady state population
+
+\[ \bar{N} = \left(\frac{\phi A_t}{w_s}\right)^\frac{1}{\alpha} \]
+
+And the subsistence wages (or steady state wages) as
+
+\[w_s = \phi A_t \frac{1}{\bar{N}^\alpha} \]
+
+Paints a very sad picture doesn't it?
+
+\end{document}
