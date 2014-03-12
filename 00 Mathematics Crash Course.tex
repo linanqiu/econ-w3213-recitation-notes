@@ -13,7 +13,7 @@
 \maketitle
 
 \begin{abstract}
-This set of recitation notes covers \textbf{Partial Derivatives}, \textbf{Taylor Series Approximation}, \textbf{Optimization}, and \textbf{Present Value}. More content may be added as more mathematical techniques are employed during the course of this lesson. This is \textbf{not} a substitute for a proper mathematics education. That being said, we do want to apply all that intellectual shebang to something more than 2D curves and 3D planes right? Attaboy.
+This set of recitation notes covers \textbf{Partial Derivatives}, \textbf{Taylor Series Approximation}, \textbf{Optimization}, \textbf{Present Value}, and \textbf{Growth Rates}. More content may be added as more mathematical techniques are employed during the course of this lesson. This is \textbf{not} a substitute for a proper mathematics education. That being said, we do want to apply all that intellectual shebang to something more than 2D curves and 3D planes right? Attaboy.
 \end{abstract}
 
 \section{Partial Derivatives}
@@ -422,5 +422,40 @@ We apply this concept in \textbf{Consumption and Savings}.
 \[C_1 + \frac{C_2}{(1+R)} = Y_1 + \frac{Y_2}{(1+R)} \]
 
 Here, we are comparing the present value of consumption with the present value of earnings.
+
+\section{Growth Accounting}
+
+Given a production function
+
+\[Y = AK^\alpha L^{1-\alpha}\]
+
+We want to find how the growth of $K$ and $L$ contributes to the growth of $Y$.
+
+We define the growth of $Y$, $g_Y$, from period 0 to 1 to be
+
+\[g_Y = \frac{Y_1-Y_0}{Y_0} = \frac{Y_1}{Y_0} - 1\]
+
+\[1 + g_Y = \frac{Y_1}{Y_0} \]
+
+Now,
+
+\begin{align*}
+1 + g_Y &= \frac{Y_1}{Y_0} \\
+&= \left(\frac{A_1}{A_0}\right) \left(\frac{K_1}{K_0}\right)^\alpha \left(\frac{L_1}{L_0}\right)^{1-\alpha} \\
+\log{\left(\frac{Y_1}{Y_0}\right)} &= \log{\left(\frac{A_1}{A_0}\right)} + \alpha \log{\left(\frac{K_1}{K_0}\right)} + (1-\alpha) \log{\left(\frac{L_1}{L_0}\right)} \\ 
+\log{(g_Y +1)} &= \log{(1 + g_A)} + \alpha \log{(1+g_K)} + (1-\alpha)\log{(1+g_L)}
+\end{align*}
+
+Now by first order approximations,
+
+\[ \log{(1+g_Y)} = \log{1} + \frac{1}{1} g_Y + ... \approx g_Y \]
+
+Then,
+
+\[g_Y \approx g_A + \alpha g_K + (1-\alpha) g_L \]
+
+
+
+
 
 \end{document}
