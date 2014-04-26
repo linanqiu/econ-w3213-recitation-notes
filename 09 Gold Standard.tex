@@ -1,0 +1,200 @@
+\documentclass[11pt]{scrartcl}
+\usepackage{dominatrix}
+\usepackage{tabularx}
+\newcolumntype{Y}{>{\centering\arraybackslash}X}
+\usepackage{colortbl}
+\usepackage{pgfplots}
+\newcommand{\jon}{J\'{o}n }
+\newcommand{\oneth}{\ensuremath{\frac{1}{3}}}
+\newcommand{\twoth}{\ensuremath{\frac{2}{3}}}
+\newcommand{\ve}{\varepsilon}
+\pgfplotsset{compat=1.9}
+\definecolor{light-gray}{gray}{0.75}
+\title{Gold Standard}
+\subject{ECON W3213 Spring 2014 \jon Steinsson}
+\author{Linan Qiu, lq2137}
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+This set of recitation notes covers the\textbf{Gold Standard}. This is in no way a substitute for attending lectures, but just in case you dozed off or checked your boyfriend's Facebook page while \jon was working Calculus magic on the board, this set of notes may save you.
+
+If you were listening in class, you'd know that this topic goes far more than just these equations. In fact, \jon goes very far into the history behind monetary economics. I didn't cover those here because you can catch up on your own with the readings.
+\end{abstract}
+
+Now that we're done with the medieval ages, let's jump a little into the future.
+
+\section{Revisiting Money Supply}
+
+In the medieval economy, we simply defined $\bar{M}$ as the number of gold coins. Now when was the last time you remember anyone carrying around gold coins? I'm watching The Tudors now (it's like Game of Thrones but slightly more historical though they do screw up history a lot) and even they don't really use massive coins all the time.
+
+Instead, people started using banknotes that have fixed denominations in gold. Say I peg \$800 to an ounce of gold. Then I can simply trade the banknotes instead of clunky pieces of gold. Then in the economy you'll only see pieces of paper money. 
+
+So imagine there are 3 ounces of gold in the economy. I define $M_g$ to be the number of gold "blocks". In this case, $M_g = 3$.
+
+Now each of these blocks are worth \$800. So what's the total value of banknotes $M_b$ in my economy? That'd be $M_b = M_g * 800 = 3 * 800 = 2,400$. 
+
+But that's not equal to my money supply! I have banks, and banks lend to each other through the fractional reserve system. Wassat? Here. Imagine there are many banks in my economy, and I make a law saying that each bank must keep 20\% of its money as "capital reserves". In other words, it can only lend out 80\% of its deposits. 
+
+Then I give the first bank \$2,400. The first bank can lend out $0.8 * 2,400 = \$1920$ and has to keep $0.2 * 2,400 = \$480$. Say that all the money gets lend to the second bank. The second bank gets \$1,920, and realizes that it can lend out $0.8 * 1,920 = \$1,536$ to the third bank. This goes on and on like this.
+
+\begin{table}[H]
+\centering
+\begin{tabularx}{\textwidth}{c*{8}{Y}}
+\toprule
+Bank & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 \\
+\midrule
+Loans & 1920 & 1536 & 1228 & 983 & 786 & 629 & 503 & 402 \\
+Reserves & 480 & 384 & 307 & 245 & 196 & 157 & 125 & 100 \\
+Total & 2,400 & 1920 & 1536 & 1228 & 983 & 786 & 629 & 503 \\
+\bottomrule
+\end{tabularx}
+\caption{Fractional Reserve Example}
+\end{table}
+
+If we find out the total amount of money that each bank has on its books, it will be\footnote{This is simply the sum of a geometric series. We're taking $2,400 + 2,400(0.8) + 2,400(0.8^2) + 2,400(0.8^3) ... $ till infinity. The sum of this series is $\frac{2,400}{1-0.8} = 12,000$ If you don't know how to do that, wiki! \url{http://en.wikipedia.org/wiki/Geometric_series}}
+
+\[ M = \frac{M_b}{c} \]
+
+Where $c$ is the percentage of money that must be kept in capital reserves. In our case, $c = 0.2$ hence $M = \frac{2,400}{0.2} = 12000$. $c$ is also called the money multiplier.
+
+Now let's piece everything together. 
+
+\begin{itemize}
+\item $M_g = 3$ ounces of gold
+\item $M_b = 2,400$ since each ounce of gold is worth \$800
+\item $M = 12,000$ since the banks proceed to multiply the money
+\end{itemize}
+
+In that case,
+
+\[ M = M_g \frac{M_b}{M_g} \frac{M}{M_b} \]
+
+This equation is telling the same story as the three points above.
+
+We have names for the two ratios. 
+
+\begin{align*}
+\text{Gold Coverage Ratio (GCR):  } &\frac{M_g}{M_b} \\
+\text{Bank Money Multiplier (BMM):  } &\frac{M}{M_b}
+\end{align*}
+
+Then, we can express $M$ in terms of these two ratios
+
+\[ M = M_g  \frac{1}{\left(\frac{M_g}{M_b}\right)}  \frac{M}{M_b} = M_g \frac{\mathrm{BMM}}{\mathrm{GCR}} \] 
+
+You can think of this as a two stage leverage.
+
+\begin{enumerate}
+\item Central bank leverages the supply of gold $\frac{M_b}{M_g}$ (approximately 2:1 in most cases)
+\item Bank system leverages monetary base $\frac{M}{M_b}$ (approximately 2:1 in most cases)
+\end{enumerate}
+
+Naturally you can see how adjusting each of these ratios and $M_g$ itself can affect the overall money supply $M$.
+
+\section{Inflow and Outflow of Gold}
+
+Let's say that I'm from Singapore, and you're from the United States. Let's say that both countries are on the gold standard. Then what happens when I, in Singapore, want to buy a box of Insomnia cookies (nope we don't have Insomnia in Singapore) from the States?
+
+What I have to do is to convert my Singapore banknotes (or Singapore Dollars SGD) into gold. I will then give you gold, since you don't take Singapore Dollars -- after all you have no use for the currency of another country right?
+
+So I'll convert my SGD into gold, which you then take (and pass me my insomnia), and convert into USD. 
+
+\[ \mathrm{SGD} \implies \mathrm{Gold} \implies \mathrm{USD} \]
+
+From my perspective, I'm reducing the gold supply in Singapore because I'm taking some of it and passing it to you. There is gold \textbf{outflow} in Singapore.
+
+So in Singapore,
+
+\[ M_{SG} = M_{SG,g} \frac{M_{SG,b}}{M_{SG,g}} \frac{M_{SG}}{M_{SG,b}} \] 
+
+falls because the amount of gold in Singapore $M_{SG,g}$ decreases. 
+
+Where does that gold go? They fly over to the USA. So from your perspective in the USA, you experience an \textbf{inflow} of gold in the USA.
+
+So in the USA,
+
+\[ M_{US} = M_{US,g} \frac{M_{US,b}}{M_{US,g}} \frac{M_{US}}{M_{US,b}} \] 
+
+increases because the amount of gold in USA $M_{US,g}$ increases.
+
+\section{Impact on Prices}
+
+Remember our good ol' money velocity equation?
+
+\[ M_t \bar{V} = P_t Y_t\]
+
+Take $\log$ and assuming that $\bar{V}$ is constant, we get
+
+\[\log{M_t} = \log{P_t} + \log{Y_t} \]
+
+Now let's see what happens to Singapore and USA in the previous example.
+
+In Singapore, $M_{SG,G}$ decreased. If the Singapore government didn't do anything, then $\log{M_t}$ would decrease, causing an unnecessary downward plunge in $Y_t$ (which eventually recovers) and a permanent change in $P_t$. 
+
+Say the Singapore government doesn't want that to happen. Then it could play with the Gold Coverage Ratio. 
+
+\[  M = M_g \frac{\mathrm{BMM}}{\mathrm{GCR}} \]
+
+Since $M_g$ decreased, it will have to decrease the GCR. That means increasing the ratio
+
+\[  \frac{M_{SG,b}}{M_{SG,g}} \] 
+
+since GCR is the inverse of this ratio. Increasing this ratio means assigning more bank notes per amount of gold. That's bad. This leaves your currency susceptible to runs.
+
+On the other hand, in USA, $M_{US,G}$ increased. If the US government didn't do anything, then what would happen is that $\log{M_t}$ would increase. Then inflation happens and we do not really want that.
+
+So what the US government can too play with the Gold Coverage Ratio such that $M_{US}$, the total money supply, stays the same and nothing happens to price. That happens by increasing the GCR or decreasing the amount of bank notes per amount of gold. This does not leave the country to runs, and isn't actually bad. However, it is kind of cheating. 
+
+That's because countries are not supposed to intervene in this manner. Rather, they're supposed to allow prices to adjust slowly, thereby affecting the price of their exports and imports.
+
+In other words, when I keep importing Insomnia cookies in Singapore, $M_{US,g}$ is supposed to increase. This increases the price level in US, and makes Insomnia cookies so darn expensive that I stop importing it. Then prices in US stop increasing. Similarly, my importing activities causes price levels in Singapore to fall, making Singapore's exports cheaper. This should rebalance the flow of gold (or specie flow if you want to sound smart).
+
+\section{Hyperinflation}
+
+So what if governments excessively decrease their gold coverage ratio (or increase the amount of money per unit of gold?)
+
+Then the total money supply $M$ will increase tremendously and that will cause prices to increase.
+
+\textbf{But why do countries want to do that?}
+
+Simply put, they wanted to buy stuff they couldn't afford. You know when you were a kid and you really wished that you could just photocopy money so that you could get that Gameboy you really wanted? No? Okay. Maybe you had more life than me.
+
+However, some governments (usually very badly managed or desperate ones) do that too. Let's look at government budgets. 
+
+Good governments do this:
+
+\[ G_1 = T_1 + B \]
+
+\[ G_2 + B(1+R) = T_2 \]
+
+They spend what they tax in period 1 plus whatever they borrow. In period 2, they pay back everything that they borrow with interest, and spend the remainder.
+
+Bad governments do this:
+
+\[ G_1 = T_1 + B + \Delta M_1 \]
+
+\[ G_2 + B(1+R) = T_2 + \Delta M_2\]
+
+In each time period, they cheat by printing money. In period 1, they spend not only what they borrow and tax, but also print money to fund their additional spending. In the second period, they pay back the debt, but continue to print money. 
+
+You may be tempted to think that the government can make the $\Delta M$s vanish by borrowing and lending, but as we have shown, if governments intend to pay back what they borrow, then borrowing $B$ has no effect on $\Delta M$. In fact, we can combine them into an intertemporal equation 
+
+\[ G_1 + \frac{G_2}{1+r} = T_1 + \frac{T_2}{1_r} + \Delta M_1 + \frac{\Delta M_2}{1+r} \]
+
+What then happens to price levels? Well, when the price/output changes goes to steady state, 
+
+\[ \frac{M^*}{\bar{M}} = \frac{P^*}{\bar{P}} \]
+
+where $M^*$ is the money supply after all the money printing, and $\bar{M}$ is that before the printing. Same for $P$.
+
+In other words, there will be inflation. And if $M^*$ is really big (as is the case for hyperinflation), price levels increase tremendously. You can go read about the German horror stories.
+
+Essentially, printing money to fund government spending is kind of like taxing the entire population. Imagine that you're the king, and you're increasing the money supply. Then everyone else's pile of cash buy less goods than they did before the printing. It's like as if you're taking those goods from them to fund your own projects. 
+
+
+
+
+
+\end{document}

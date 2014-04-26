@@ -1,0 +1,487 @@
+\documentclass[11pt]{scrartcl}
+\usepackage{dominatrix}
+\usepackage{tabularx}
+\newcolumntype{Y}{>{\centering\arraybackslash}X}
+\usepackage{colortbl}
+\usepackage{pgfplots}
+\newcommand{\jon}{J\'{o}n }
+\newcommand{\oneth}{\ensuremath{\frac{1}{3}}}
+\newcommand{\twoth}{\ensuremath{\frac{2}{3}}}
+\newcommand{\ve}{\varepsilon}
+\pgfplotsset{compat=1.9}
+\definecolor{light-gray}{gray}{0.75}
+\title{Measuring Inflation}
+\subject{ECON W3213 Spring 2014 \jon Steinsson}
+\author{Linan Qiu, lq2137}
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+This set of recitation notes covers \textbf{Inflation Measurement}. This is in no way a substitute for attending lectures, but just in case you dozed off or checked your boyfriend's Facebook page while \jon was working Calculus magic on the board, this set of notes may save you.
+
+If you were listening in class, you'd know that this topic goes far more than just inflation measurement. However, inflation measurement is the only really technical part of the lecture, so you can go read the rest on your own. To try and simplify those already simple ideas is an insult to your intelligence.
+\end{abstract}
+
+\section{Gains and Losses from Inflation}
+
+I'm sure you've heard one of them Republicans go, "Inflashun? Thet's a bad bad thin'!" Well, not really.
+
+Let's say I lend you \$1,000 this year, and you're supposed to return them to me next year with a 5\% interest. Let's say that my life goal is to eat cookies, and each cookie costs me \$1. That means I can buy 1,000 cookies this year. So next year, you return me \$1,050. Without inflation (or inflation at 0), I would have earned \$50 that's equal to the opportunity cost of lending you that sum of money. In other words, you'd have to return me the equivalent of 1,050 cookies. Easy peasy right?
+
+Now say inflation kicks in, and in the second year, a cookie costs \$2. In the first year, the cookie still costs \$1. Then, when I lent you the money in the first year, I'm lending you the equivalent of 1,000 cookies. When you return \$1,050 to me, however, you're only returning me the equivalent of 525 cookies. In other words, you could have taken the \$1,000 from me in the first year, bought cookies, and simply returned a little more than half of them to me in the second year and still keep 485 cookies for yourself.
+
+What voodoo happened here? Two things.
+
+\begin{enumerate}
+\item First, inflation eroded the number of cookies money can buy. It makes you better off, and makes me worse off.
+\item Second, interest rate did not increase in tandem with inflation. Later on, you'll learn about real and nominal interest rate, but let's shove that aside first. If interest rates had increased in tandem, I could have been able to still extract 1,050 cookies from you. That'd mean you'd have to return me \$2,100 for an interest rate of $\frac{2100 - 1000}{1000} = 110\%$
+\end{enumerate}
+
+Evidently, you got the nicer deal in this. So the whole deal about inflation isn't that simple. 
+
+If inflation is so important, we should measure it. Unfortunately, that's not an easy task. 
+
+\section{Price Indices}
+
+If I had an ideal country, I'd make sure that the economy only has one thing in it -- cookies. Everyone trades in cookies, feeds on cookies, and sleeps in cookies. I don't care if everyone has diabetes or if you need something savory. 
+
+Unfortunately, the world isn't how I want it to be. I would have been happy with one single pokemon but the universe decides to create 151, then 251, then 386, then 493, 649, and finally 719 of them. Still, we want to somehow mash them together so that we can say "this is a generic pokemon."
+
+In short, we want to measure aggregate price changes. There are many reasons for doing so:
+
+\begin{itemize}
+\item Measure changes in prices of goods that "people" use, people being consumers, producers, wage negotiators etc.
+\item Apply this change to aggregated production figures to find real production -- information that can be really useful for hardcore macroeconomists
+\end{itemize}
+
+\subsection{Basket of Goods}
+
+We can do this in two ways
+
+\begin{enumerate}
+\item Measure the cost of maintaining a certain standard of living. Say I'm a student in Columbia university and I buy a wide variety of things which give me a certain level of happiness. I track the cost of maintaining this lifestyle \textbf{given that I derive the same utility.}
+\begin{itemize}
+\item The problem with this method is that Kanye West probably don't live the same kind of life as I do. So whose utility should we use? Besides, how do we measure utility?
+\end{itemize}
+\item Measure the cost of buying a particular basket of goods. Say I'm a middle class guy living in Manhattan. My typical expenditure involves cookies, tuition, and the occasional visit to the restaurant. I'd measure these components and see how they change.
+\end{enumerate}
+
+Evidently, the second is easier. That's how we shall proceed.
+
+\subsection{Cost of Basket of Goods}
+Let's say you want to construct an index for the price of a cookie. You bring a piece of cookie to the cookie lab and find out that the cookie's 40\% flour, 20\% sugar, 20\% cookies, and 20\% water. Then you find the prices of those ingredients -- flour, sugar, cookies and water -- and measure them over time. You should be careful to select the same kind of flour each time. You can't just skip from Whole Foods Organic Hippie flour to expired flour from a shady grocer. The difference in price reflects more of changes in quality than anything.
+
+Similarly, the Bureau of Labor Statistics (the nerds who do this kind of thing for a living) measures the things that constitute what people spend income on, then measure the prices of those things. The bureau tries hard to measure the exact same product over time. 
+
+\section{Calculating Inflation}
+
+The idea of the basket of goods is to track the change in prices of goods over a certain time period. Let's say we have apples and cookies. Then it makes sense that inflation $\pi$ is
+
+\[ \pi = \frac{P_{t,a} Q_a + P_{t,c} Q_c}{P_{t-1,a} Q_a + P_{t-1,c} Q_c} - 1\]
+
+After all, what I'm doing is
+
+\begin{enumerate}
+\item Imagine a basket. Fill the basket with $Q_a$ apples and $Q_c$ cookies.
+\item Find the change in the value of the basket by 
+\begin{enumerate}
+\item Find the value of the basket in time $t-1$. That gives $P_{t-1,a} Q_a + P_{t-1,c} Q_c$
+\item Find the value of the basket in time $t$. That gives $P_{t,a} Q_a + P_{t,c} Q_c$
+\item Find the change in value by doing $\frac{P_{t,a} Q_a + P_{t,c} Q_c}{P_{t-1,a} Q_a + P_{t-1,c} Q_c}$. That change in value is caused by inflation only, since we're still looking at the same damned basket, but its value changed!
+\item We minus 1 from the previous value since we want the change, not the whole multiple. 
+\end{enumerate}
+\end{enumerate}
+
+So let's find us some \textbf{prices and quantities}.
+
+\subsection{Prices and Quantities}
+
+Let's say there are 2 goods, apples and cookies, and there are 3 time periods. At $t=0$, we do massive amounts of surveys and find that people spend 70\% on apples and 30\% on cookies. We also measure the prices of apples and cookies for all 3 years. Here's what we find.
+
+\begin{table}[H]
+\centering
+\begin{tabularx}{0.75\textwidth}{c*{3}{Y}}
+\toprule
+Year & 1 & 2 & 3 \\
+\midrule
+ & \multicolumn{3}{c}{Prices} \\
+\cmidrule(l){2-4}
+$P_a$ & \$2 & \$3 & \$3 \\
+$P_c$ & \$4 & \$2 & \$1 \\
+
+ & \multicolumn{3}{c}{Weights} \\
+\cmidrule(l){2-4}
+$W_a$ & 0.7 & - & - \\
+$W_c$ & 0.3 & - & - \\
+
+\bottomrule
+\end{tabularx}
+\caption{Price and Weights}
+\end{table}
+
+Let's further assume that the weights in the basket are constant over the 3 years.
+
+\begin{table}[H]
+\centering
+\begin{tabularx}{0.75\textwidth}{c*{3}{Y}}
+\toprule
+Year & 1 & 2 & 3 \\
+\midrule
+ & \multicolumn{3}{c}{Prices} \\
+\cmidrule(l){2-4}
+$P_a$ & \$2 & \$3 & \$3 \\
+$P_c$ & \$4 & \$2 & \$1 \\
+
+ & \multicolumn{3}{c}{Weights} \\
+\cmidrule(l){2-4}
+$W_a$ & 0.7 & 0.7 & 0.7 \\
+$W_c$ & 0.3 & 0.3 & 0.3 \\
+
+\bottomrule
+\end{tabularx}
+\caption{Prices Weights and Initial Income}
+\end{table}
+
+Now I want to find how many apples and cookies our consumer consumes. We know that if Linan had \$100, he would spend 70\% on apples and 30\% on cookies. That'd be \$70 on apples, which boils down to 35 apples at \$2 each, and 7.5 cookies. If someone else came along and said he had \$200, I'd be jealous. I'm kidding. I'd do the same thing and find the number of apples and cookies he has. For the math geeks, I can assign any income $x$, and the person will spend $0.7x$ on apples and $0.3x$ on cookies. 
+
+Instead of using the ugly $x$ just for generality, we can just use \$100 as a case in point. The conclusion for inflation numbers is the same even if you use any other income. So say we use \$100.
+
+\begin{table}[H]
+\centering
+\begin{tabularx}{0.75\textwidth}{c*{3}{Y}}
+\toprule
+Year & 1 & 2 & 3 \\
+\midrule
+ & \multicolumn{3}{c}{Prices} \\
+\cmidrule(l){2-4}
+$P_a$ & \$2 & \$3 & \$3 \\
+$P_c$ & \$4 & \$2 & \$1 \\
+
+ & \multicolumn{3}{c}{Quantities} \\
+\cmidrule(l){2-4}
+$Q_a$ & 35 & - & - \\
+$Q_c$ & 7.5 & - & - \\
+
+ & \multicolumn{3}{c}{Weights} \\
+\cmidrule(l){2-4}
+$W_a$ & 0.7 & 0.7 & 0.7 \\
+$W_c$ & 0.3 & 0.3 & 0.3 \\
+
+ & \multicolumn{3}{c}{Income} \\
+\cmidrule(l){2-4}
+$I$ & 100 & - & - \\
+
+\bottomrule
+\end{tabularx}
+\caption{Prices Weights Initial Income and Initial Quantities}
+\end{table}
+
+Now the concept of the basket answer the question: if I maintained this same little collection (think goodie bag) of stuff, how much will it cost me next year? We find that 35 apples and 7.5 cookies at the price in $t=2$ will cost us
+
+\[ I_2 = 35 * 3 + 7.5 * 2 = 120 \]
+
+This means that we have an income of 120 in year 2. 
+
+\begin{table}[H]
+\centering
+\begin{tabularx}{0.75\textwidth}{c*{3}{Y}}
+\toprule
+Year & 1 & 2 & 3 \\
+\midrule
+ & \multicolumn{3}{c}{Prices} \\
+\cmidrule(l){2-4}
+$P_a$ & \$2 & \$3 & \$3 \\
+$P_c$ & \$4 & \$2 & \$1 \\
+
+ & \multicolumn{3}{c}{Quantities} \\
+\cmidrule(l){2-4}
+$Q_a$ & 35 & - & - \\
+$Q_c$ & 7.5 & - & - \\
+
+ & \multicolumn{3}{c}{Weights} \\
+\cmidrule(l){2-4}
+$W_a$ & 0.7 & 0.7 & 0.7 \\
+$W_c$ & 0.3 & 0.3 & 0.3 \\
+
+ & \multicolumn{3}{c}{Income} \\
+\cmidrule(l){2-4}
+$I$ & 100 & 120 & - \\
+
+\bottomrule
+\end{tabularx}
+\caption{Finding Second Year Income}
+\end{table}
+
+Given this income, and our assumption that the weights 7:3 continues into year 2, we will spend $0.7 * 120 = \$84$ on apples and the remaining $0.3 * 120 = \$36$ on cookies. This will buy us 28 and 18 cookies at the second year's prices. 
+
+\begin{table}[H]
+\centering
+\begin{tabularx}{0.75\textwidth}{c*{3}{Y}}
+\toprule
+Year & 1 & 2 & 3 \\
+\midrule
+ & \multicolumn{3}{c}{Prices} \\
+\cmidrule(l){2-4}
+$P_a$ & \$2 & \$3 & \$3 \\
+$P_c$ & \$4 & \$2 & \$1 \\
+
+ & \multicolumn{3}{c}{Quantities} \\
+\cmidrule(l){2-4}
+$Q_a$ & 35 & 28 & - \\
+$Q_c$ & 7.5 & 18 & - \\
+
+ & \multicolumn{3}{c}{Weights} \\
+\cmidrule(l){2-4}
+$W_a$ & 0.7 & 0.7 & 0.7 \\
+$W_c$ & 0.3 & 0.3 & 0.3 \\
+
+ & \multicolumn{3}{c}{Income} \\
+\cmidrule(l){2-4}
+$I$ & 100 & 120 & - \\
+
+\bottomrule
+\end{tabularx}
+\caption{Finding Second Year Quantities}
+\end{table}
+
+You get the gist? If not, let's proceed to find the third year's quantities. The income in the third year is $28 * 3 + 18 * 1 = \$102$. Given the weights, we find the quantities to be
+
+\begin{table}[H]
+\centering
+\begin{tabularx}{0.75\textwidth}{c*{3}{Y}}
+\toprule
+Year & 1 & 2 & 3 \\
+\midrule
+ & \multicolumn{3}{c}{Prices} \\
+\cmidrule(l){2-4}
+$P_a$ & \$2 & \$3 & \$3 \\
+$P_c$ & \$4 & \$2 & \$1 \\
+
+ & \multicolumn{3}{c}{Quantities} \\
+\cmidrule(l){2-4}
+$Q_a$ & 35 & 28 & 23.8 \\
+$Q_c$ & 7.5 & 18 & 30.6 \\
+
+ & \multicolumn{3}{c}{Weights} \\
+\cmidrule(l){2-4}
+$W_a$ & 0.7 & 0.7 & 0.7 \\
+$W_c$ & 0.3 & 0.3 & 0.3 \\
+
+ & \multicolumn{3}{c}{Income} \\
+\cmidrule(l){2-4}
+$I$ & 100 & 120 & 102 \\
+
+\bottomrule
+\end{tabularx}
+\caption{Third Year Quantities}
+\end{table}
+
+Fantastic. Now let's find inflation. But there's a huge problem we haven't answered.
+
+\subsection{Which Quantity?}
+
+Which quantity weights $Q_a$ and $Q_b$ shall we use for our basket? We have 3 years there, but we can only pick one. 
+
+Well, let's try picking the one from year 1 first (just in case you're lost by this point).
+
+In that case, inflation from year 1 to 2, or $\pi_2$, is
+
+\[ \pi_2 = \frac{P_{2,a} Q_{1,a} + P_{2,c} Q_{1,c}}{P_{1,a} Q_{1,a} + P_{1,c} Q_{1,c}} -1 = \frac{3*35 + 2*7.5}{2*35 + 4*7.5} -1= 1.2 -1 = 0.2 = 20\% \]
+
+\begin{table}[H]
+\centering
+\begin{tabularx}{0.75\textwidth}{c*{3}{Y}}
+\toprule
+Year & 1 & 2 & 3 \\
+\midrule
+ & \multicolumn{3}{c}{Prices} \\
+\cmidrule(l){2-4}
+$P_a$ & \$2 & \$3 & \$3 \\
+$P_c$ & \$4 & \$2 & \$1 \\
+
+ & \multicolumn{3}{c}{Quantities} \\
+\cmidrule(l){2-4}
+$Q_a$ & 35 & 28 & 23.8 \\
+$Q_c$ & 7.5 & 18 & 30.6 \\
+
+ & \multicolumn{3}{c}{Weights} \\
+\cmidrule(l){2-4}
+$W_a$ & 0.7 & 0.7 & 0.7 \\
+$W_c$ & 0.3 & 0.3 & 0.3 \\
+
+ & \multicolumn{3}{c}{Income} \\
+\cmidrule(l){2-4}
+$I$ & 100 & 120 & 102 \\
+
+ & \multicolumn{3}{c}{Inflation} \\
+\cmidrule(l){2-4}
+$\pi$ using $t_1$ Weights & - & 20\% & - \\
+\bottomrule
+\end{tabularx}
+\caption{Inflation using Year 1 Weights}
+\end{table}
+
+Can we find $\pi_3$ using $Q_a$ and $Q_C$? If you really force fit the numbers, no one can stop you. But it doesn't really make sense since year 1 is not related to year 2 and 3, the years that we're investing for $\pi_3$. You don't want to be one of those economists who do something that makes mathematical, but not common sense right?
+
+Let's try doing the same using the quantities from year 2.
+
+\[ \pi_2 = \frac{P_{2,a} Q_{2,a} + P_{2,c} Q_{2,c}}{P_{1,a} Q_{2,a} + P_{1,c} Q_{2,c}} -1 = \frac{3*28 + 2*18}{2*28 + 4*18} -1= 0.9375 -1 = -0.0625 = -6.25\% \]
+
+Again using quantities from year 2, we can find $\pi_3$, since this time it makes sense for us to use the quantities from year 2.
+
+\[ \pi_3 = \frac{P_{3,a} Q_{2,a} + P_{3,c} Q_{2,c}}{P_{2,a} Q_{2,a} + P_{2,c} Q_{2,c}} -1 = \frac{3*28 + 1*18}{3*28 + 2*18} -1 = 0.85 - 1 = -0.15 = -15\% \]
+
+Let's add these to our table!
+
+\begin{table}[H]
+\centering
+\begin{tabularx}{0.75\textwidth}{c*{3}{Y}}
+\toprule
+Year & 1 & 2 & 3 \\
+\midrule
+ & \multicolumn{3}{c}{Prices} \\
+\cmidrule(l){2-4}
+$P_a$ & \$2 & \$3 & \$3 \\
+$P_c$ & \$4 & \$2 & \$1 \\
+
+ & \multicolumn{3}{c}{Quantities} \\
+\cmidrule(l){2-4}
+$Q_a$ & 35 & 28 & 23.8 \\
+$Q_c$ & 7.5 & 18 & 30.6 \\
+
+ & \multicolumn{3}{c}{Weights} \\
+\cmidrule(l){2-4}
+$W_a$ & 0.7 & 0.7 & 0.7 \\
+$W_c$ & 0.3 & 0.3 & 0.3 \\
+
+ & \multicolumn{3}{c}{Income} \\
+\cmidrule(l){2-4}
+$I$ & 100 & 120 & 102 \\
+
+ & \multicolumn{3}{c}{Inflation} \\
+\cmidrule(l){2-4}
+$\pi$ using $t_1$ Weights & - & 20\% & - \\
+$\pi$ using $t_2$ Weights & - & -6.25\% & -15\% \\
+\bottomrule
+\end{tabularx}
+\caption{Inflation with Year 2 Weights}
+\end{table}
+
+Now we can do the same for year 3 quantities. Note that we can only 
+
+\begin{table}[H]
+\centering
+\begin{tabularx}{0.75\textwidth}{c*{3}{Y}}
+\toprule
+Year & 1 & 2 & 3 \\
+\midrule
+ & \multicolumn{3}{c}{Prices} \\
+\cmidrule(l){2-4}
+$P_a$ & \$2 & \$3 & \$3 \\
+$P_c$ & \$4 & \$2 & \$1 \\
+
+ & \multicolumn{3}{c}{Quantities} \\
+\cmidrule(l){2-4}
+$Q_a$ & 35 & 28 & 23.8 \\
+$Q_c$ & 7.5 & 18 & 30.6 \\
+
+ & \multicolumn{3}{c}{Weights} \\
+\cmidrule(l){2-4}
+$W_a$ & 0.7 & 0.7 & 0.7 \\
+$W_c$ & 0.3 & 0.3 & 0.3 \\
+
+ & \multicolumn{3}{c}{Income} \\
+\cmidrule(l){2-4}
+$I$ & 100 & 120 & 102 \\
+
+ & \multicolumn{3}{c}{Inflation} \\
+\cmidrule(l){2-4}
+$\pi$ using $t_1$ Weights & - & 20\% & - \\
+$\pi$ using $t_2$ Weights & - & -6.25\% & -15\% \\
+$\pi$ using $t_3$ Weights & - & - & -23.1\% \\
+
+\bottomrule
+\end{tabularx}
+\caption{Inflation with Year 3 Weights}
+\end{table}
+
+Now for the million dollar question: which weight should we use? Well, both! Here's what we do.
+
+\subsection{Fisher Index}
+
+Let's say we're trying to calculate $\pi_2$. We have two measures -- 
+
+\begin{align*}
+\pi_{2, t_1 \mathrm{\:weights}} &= 0.2 \\
+\pi_{2, t_2 \mathrm{\:weights}} &= -0.0625
+\end{align*}
+
+Or if we measure price indices,
+
+\begin{align*}
+\Delta P_{2, t_1 \mathrm{\:weights}} &= 1.2 \\
+\Delta P_{2, t_2 \mathrm{\:weights}} &= 0.9375
+\end{align*}
+
+We can just take the average of the two, but not the arithmetic average. Let's do something a little more complex -- the \textbf{geometric average}\footnote{Now if you really must know why we're using geometric average instead of arithmetic average, here's why. We are comparing changes in the state of things. When that happens, geometric average is a better measure. Not gonna rephrase wiki because wiki does a good job of explaining this. \url{http://en.wikipedia.org/wiki/Geometric_mean}}.
+
+\[ \Delta P_{2, \mathrm{awesome}} = \sqrt{\Delta P_{2, t_1 \mathrm{\:weights}} * \Delta P_{2, t_2 \mathrm{\:weights}}} \]
+
+\[ \pi_{2, \mathrm{awesome}} = \Delta P_{2, \mathrm{awesome}} - 1 \]
+
+Now all we need to do, as all good economists do, is to assign these things some names.
+
+\begin{itemize}
+\item \textbf{Laspeyres Index}: initial period quantities as weights. \\In our case, this was $\Delta P_{2, t_1 \mathrm{\:weights}}$
+\item \textbf{Paasche Index}: final period quantities as weights. \\In our case, this was $\Delta P_{2, t_2 \mathrm{\:weights}}$
+\item \textbf{Fisher Index}: the awesome geometric average one. \\In our case, this was $\Delta P_{2, \mathrm{awesome}} = \sqrt{\Delta P_{2, t_1 \mathrm{\:weights}} * \Delta P_{2, t_2 \mathrm{\:weights}}}$
+\end{itemize}
+
+Try looking at this table again and finding the \textbf{Fisher Indices}. Remember to convert these inflation numbers into price indices!
+
+
+\begin{table}[H]
+\centering
+\begin{tabularx}{0.75\textwidth}{c*{3}{Y}}
+\toprule
+Year & 1 & 2 & 3 \\
+\midrule
+ & \multicolumn{3}{c}{Prices} \\
+\cmidrule(l){2-4}
+$P_a$ & \$2 & \$3 & \$3 \\
+$P_c$ & \$4 & \$2 & \$1 \\
+
+ & \multicolumn{3}{c}{Quantities} \\
+\cmidrule(l){2-4}
+$Q_a$ & 35 & 28 & 23.8 \\
+$Q_c$ & 7.5 & 18 & 30.6 \\
+
+ & \multicolumn{3}{c}{Weights} \\
+\cmidrule(l){2-4}
+$W_a$ & 0.7 & 0.7 & 0.7 \\
+$W_c$ & 0.3 & 0.3 & 0.3 \\
+
+ & \multicolumn{3}{c}{Income} \\
+\cmidrule(l){2-4}
+$I$ & 100 & 120 & 102 \\
+
+ & \multicolumn{3}{c}{Inflation} \\
+\cmidrule(l){2-4}
+$\pi$ using $t_1$ Weights & - & 20\% & - \\
+$\pi$ using $t_2$ Weights & - & -6.25\% & -15\% \\
+$\pi$ using $t_3$ Weights & - & - & -23.1\% \\
+
+\bottomrule
+\end{tabularx}
+\caption{Inflation for All 3 Years}
+\end{table}
+
+Just in case you're still confused about change in prices and inflation, we use inflation to measure the percentage change in prices. Price indices is simply one plus inflation. Just imagine price indices as a number you can multiple to an existing price to produce the current price. In other words,
+
+\[ \pi = \Delta P - 1\] 
+
+
+
+
+\end{document}

@@ -1,0 +1,222 @@
+\documentclass[11pt]{scrartcl}
+\usepackage{dominatrix}
+\usepackage{tabularx}
+\newcolumntype{Y}{>{\centering\arraybackslash}X}
+\usepackage{colortbl}
+\usepackage{pgfplots}
+\newcommand{\jon}{J\'{o}n }
+\newcommand{\oneth}{\ensuremath{\frac{1}{3}}}
+\newcommand{\twoth}{\ensuremath{\frac{2}{3}}}
+\newcommand{\ve}{\varepsilon}
+\pgfplotsset{compat=1.9}
+\definecolor{light-gray}{gray}{0.75}
+\title{Medieval Monetary Economics}
+\subject{ECON W3213 Spring 2014 \jon Steinsson}
+\author{Linan Qiu, lq2137}
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+This set of recitation notes covers \textbf{Medieval Monetary Economics}. This is in no way a substitute for attending lectures, but just in case you dozed off or checked your boyfriend's Facebook page while \jon was working Calculus magic on the board, this set of notes may save you.
+
+If you were listening in class, you'd know that this topic goes far more than just these equations. In fact, \jon goes very far into the history behind monetary economics. I didn't cover those here because you can catch up on your own with the readings.
+\end{abstract}
+
+We start from way back in the medieval economy and slowly add in more "modern" elements of money until we have what we see today.
+
+Let's start with Age of Empires. We assume that
+
+\begin{itemize}
+\item The only medium of exchange is gold coins
+\begin{itemize}
+\item This means that people pay each other using gold coins. All other candidates for money, for example cows or sheep, are inferior.
+\end{itemize}
+\item People can hold gold as a store of value
+\begin{itemize}
+\item There may be other stores of value as well, for example cows and sheep.
+\end{itemize}
+\item Every time there is a transaction, gold coins change hands
+\item People want to hold money n order to be able to engage in transactions
+\item Hence the demand for gold coins comes from transactions
+\end{itemize}
+
+\section{Money Market}
+
+The demand for money comes from transactions. The more transactions there are, the more people need gold. Furthermore, the pricier items are in terms of gold coins, the more people need gold. 
+
+Hence, money demand $M^d_t$ is equal to a constant $k_1$ times price $P_t$ times quantity transacted $T_t$ or
+
+\[M^d_t = k_1 P_t T_t\]
+
+Now the value of transactions is higher when the value of final output in the economy is higher.
+
+\[P_tT_t = k_2 P_t Y_t\] 
+
+where $Y_t$ is output.
+
+Combining the two equations above,
+
+\[ M^d_t = kP_tY_t \] 
+
+where $k=k_1k_2$
+
+The supply of money is exogenous. It is simply the stock of gold in the economy. Assuming that no gold mines are currently operating and there are no inflow of gold, we have
+
+\[ M^s_t = \bar{M}\]
+
+Taking demand equals supply, we get
+
+\begin{align*}
+M^d_t &= M^s_t \\
+\bar{M} &= kP_tY_t \\
+\frac{\bar{M}}{k} &= P_tY_t \\
+\bar{M}\bar{V} &= P_tY_t
+\end{align*}
+
+where $\bar{V} = \frac{1}{k}$. $\bar{V}$ is known as money velocity, or \textbf{number of times each gold coin must change hands per year}.
+
+This equation should make intuitive sense. Let's say I have 20 gold coins in my economy or $\bar{M} = 20$. Let's say that each gold coin changes hands 5 times, or $\bar{V}=5$. But why do those gold coins change hands? They only change hands because they are used in transaction. Say you and me are engaging in a transaction. If I give you 5 gold coins, you must be giving me something worth 5 gold coins, or a couple of things that add up to 5 gold coins. That means the value of all the things that get transacted in the economy is worth $20*5 = 100$ gold coins. That's price times output, or $P_t Y_t$.
+
+\section{Production Function}
+
+For the medieval economy, we use the production function
+
+\[Y_t = \bar{A}L_t\]
+
+This is typical of an economy comprising entirely of small businesses -- think of small bakeries, pubs, grocers etc. After all, they have no capital, and by working twice as hard they get twice as many output.
+
+\section{Price Adjustment}
+
+Now our medieval people may be backward, but they're not dumb. They know how to adjust prices. Each day, after working for an entire day, they go back home and ponder as such
+
+\begin{quote}
+How much did I work today? If I worked more than usual, more customers are coming to me. I should probably price my goods a little higher tomorrow to earn more money. If I worked less than usual, fewer customers are coming. I should then price my goods a little cheaper tomorrow.
+\end{quote}
+
+In other words, \textbf{Today (or tonight), you decide the price tomorrow based on the demand today}. More formally, based on $L_t$ (which reflects demand), you calibrate $P_{t+1}$. Then there should be some relationship between prices and labor. Indeed there is!
+
+\[\frac{P_{t+1}}{P_t} = \left(\frac{L_t}{\bar{L}}\right)^\theta \]
+
+Now what's this $\theta$? It is the speed of price adjustment. Think -- if demand surges up overnight, the pub owner's not just going to jack up prices ALL THE WAY. He'll push it up only a little. If demand drops drastically, he'll only push prices down a little. If the demand surge or drop is permanent, then he will slowly change the prices. Afte all, he wants to minimize volatility in prices -- customers hate that. Just imagine the look on your face if you go to Whole Foods everyday, and find that prices change by more than 100\% day to day. Hence, $\theta$ is usually $<1$.
+
+\section{Model of Medieval Economy}
+
+Now we have our three equations
+
+\begin{align}
+\mathrm{Money\:Market\:Equilibrium:\;\;\;}&M_t \bar{V} = P_tY_t \\
+\mathrm{Production:\;\;\;}&Y_t = \bar{A}L_t \\
+\mathrm{Price\:Adjustment:\;\;\;}&\frac{P_{t+1}}{P_t} = \left(\frac{L_t}{\bar{L}}\right)^\theta 
+\end{align}
+
+\setcounter{equation}{0}
+
+\section{Long Run and Short Run}
+
+Let's see what happens to the model in the long run and the short run.
+
+\subsection{Long Run}
+
+In the long run, this model goes to a steady state. How?
+
+At the steady state $Y^*$, $L^*$, $P^*$, 
+
+\[ \frac{P_{t+1}}{P_{t}} = \left(\frac{L^*}{\bar{L}}\right)^\theta = 1 \implies L^* = \bar{L} \]
+
+This means that
+
+\[Y^* = \bar{A} \bar{L}\]
+
+This further means that
+
+\[P^* = \frac{\bar{M} \bar{V}}{Y^*}\]
+
+So what if money supply changes? Say a someone discovered a gold mine and jacked up the money supply? Well in the long run, production doesn't change.
+
+\[Y^* = \bar{A}\bar{L} \]
+
+The long run production doesn't depend on money supply at all!
+
+What changes then? Only prices. Let's say the original money supply was $\bar{M}$ and the new money supply is $\tilde{M}$
+
+\[ \frac{P^*_{2}}{P^*_{1}} = \frac{\frac{\tilde{M} \bar{V}}{Y^*}}{\frac{\bar{M} \bar{V}}{Y^*}} = \frac{\tilde{M}}{\tilde{M}} \]
+
+However, these prices don't adjust immediately (as we will show later). Instead, this is only the \textbf{long run} result.
+
+\subsection{Short Run}
+
+Let's say that at $t=-1$, we were in the original steady state described. Then in $t=0$, a huge gold mine was discovered that jacked up money supply from $\bar{M}$ to $\tilde{M}$
+
+The three equations, logged, are
+
+\begin{align}
+\log{M_t} + \log{\bar{V}} &= \log{P_t} + \log{Y_t} \\
+\log{Y_t} &= \log{\bar{A}} + \log{L_t} \\
+\log{P_{t+1}} - \log{P_t} &= \theta (\log{L_t} - \log{\bar{L}}) 
+\end{align}
+
+Combining (2) and (3), 
+
+\[\log{P_{t+1}} - \log{P_t} = \theta (\log{Y_t} - \log{\bar{A}} - \log{\bar{L}}) = \theta(\log{Y_t} - \log{Y^*})\]
+
+Now we're left with two equations
+
+\setcounter{equation}{0}
+
+\begin{align}
+\log{M_t} + \log{\bar{V}} &= \log{P_t} + \log{Y_t} \\
+\log{P_{t+1}} - \log{P_t} &= \theta(\log{Y_t} - \log{Y^*})
+\end{align}
+
+There are two endogenous variables left: $P_t$ and $Y_t$, since $M_t$ is exogenous and in this question equal to either $\bar{M}$ or $\tilde{M}$
+
+Let's trace out what happens in the first two time periods by hand. This applies to both this part and the next part when $\theta$ changes.
+
+\textbf{When} $\mathbf{t=0}$, 
+\begin{align*}
+\log{P_0} - \log{P_{-1}} = \theta(\log{L_{-1}} - \log{\bar{L}}) &\implies \log{P_0} = \log{P_1} \\
+\log{\tilde{M}} + \log{\bar{V}} = \log{P_0} + \log{Y_0} &\implies \Delta \log{\bar{M}} + \Delta \log{\bar{V}} = \Delta \log{P_0} + \Delta \log{Y_0} \\
+&\implies \Delta \log{\tilde{M}} = \Delta \log{Y_0}
+\end{align*}
+
+Hence, during first year with new gold coins, all the change in money supply goes to changes in output.
+
+\textbf{When} $\mathbf{t=1}$, 
+\begin{align*}
+\log{P_0} - \log{P_{-1}} = \theta(\log{L_{-1}} - \log{\bar{L}}) \\
+= \theta(\log{Y_0} - \log{\bar{A}} - \log{\bar{L}}) = \theta(\log{Y_0} - \log{Y_{-1}}) &\implies \Delta \log{P_1} - \theta (\Delta \log{Y_0}) = \theta(\Delta \log{\tilde{M}}) \\
+\Delta \log{\bar{M}} + \Delta \log{\bar{V}} = \Delta \log{P_0} + \Delta \log{Y_0} &\implies \Delta \log{Y_1} = \Delta \log{\tilde{M}} + \Delta \log{\bar{V}} - \Delta \log{P_1} \\
+&\implies \Delta \log{Y_1} = \Delta \log{\tilde{M}} - \theta(\Delta \log{\tilde{M}}) \\
+&\implies \Delta \log{Y_1} = (1-\theta) \Delta \log{\bar{M}}
+\end{align*}
+
+Not all of the change in money supply goes to change in output, some goes to change in prices.
+
+The plots should look like
+
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}
+\begin{axis}[xlabel={$Time$},ylabel={$P_t$, $Y_t$, or $M_t$},ymin=0,ymax=2.5, scale=1.25]
+\addplot[black]
+coordinates{(-1, 1)(0, 1)(1, 1.14869835499704)(2, 1.2834258975629)(3, 1.4024992506424)(4, 1.50566414828805)(5, 1.59363363262294)(6, 1.66769562131571)(7, 1.72941582998867)(8, 1.78043262206943)(9, 1.82232751931719)(10, 1.85655212035295)(11, 1.88439401379797)(12, 1.90696785281356)(13, 1.92522147163245)(14, 1.93995008850302)(15, 1.95181406964312)(16, 1.9613574732555)(17, 1.96902578222042)(18, 1.97518200991052)(19, 1.98012084749214)(20, 1.98408080757291)};
+
+\addplot[blue]
+coordinates{(-1, 1)(0, 2)(1, 1.74110112659225)(2, 1.558329159321)(3, 1.42602571736414)(4, 1.32831747523112)(5, 1.25499359392173)(6, 1.19925960974948)(7, 1.15645986657419)(8, 1.12332248646139)(9, 1.09749755672317)(10, 1.07726574334998)(11, 1.06134915806118)(12, 1.04878537781808)(13, 1.03884152003777)(14, 1.03095435900793)(15, 1.02468776668143)(16, 1.01970192954187)(17, 1.01573073245625)(18, 1.01256491298774)(19, 1.0100393632707)(20, 1.0080234597131)};
+
+\addplot[red]
+coordinates{(-1, 1)(0, 2)(1, 2)(2, 2)(3, 2)(4, 2)(5, 2)(6, 2)(7, 2)(8, 2)(9, 2)(10, 2)(11, 2)(12, 2)(13, 2)(14, 2)(15, 2)(16, 2)(17, 2)(18, 2)(19, 2)(20, 2)};
+
+\end{axis}
+\end{tikzpicture}
+\caption{Time series of $P_t$ $Y_t$ and $M_t$. $P_t$ in black, $Y_t$ in blue, $M_t$ in red.}
+\end{figure}
+
+In this plot, we assume that $\bar{M} = 1$ and $\tilde{M} = 2$.
+
+The intuition is that it takes a while for prices (the black line) to catch up with the new money supply. Output increases temporarily, but goes back down to the original level. In the long run, just as we have predicted output stays the same but prices increase by the same proportion that money supply did. 
+
+
+
+\end{document}
