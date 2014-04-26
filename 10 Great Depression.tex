@@ -1,18 +1,27 @@
 \documentclass[11pt]{scrartcl}
 \usepackage{dominatrix}
-\usepackage{tabularx}
-\newcolumntype{Y}{>{\centering\arraybackslash}X}
+
+% Graph Drawing Stuff
 \usepackage{colortbl}
 \usepackage{pgfplots}
-\newcommand{\jon}{J\'{o}n }
-\newcommand{\oneth}{\ensuremath{\frac{1}{3}}}
-\newcommand{\twoth}{\ensuremath{\frac{2}{3}}}
-\newcommand{\ve}{\varepsilon}
+\usepackage{tikz}
+\usetikzlibrary{trees}
+\usetikzlibrary{calc}
 \pgfplotsset{compat=1.9}
-\definecolor{light-gray}{gray}{0.75}
+
+% Tables
+\usepackage{multirow}
+
+% Strikeout
+\usepackage{ulem}
+
+% Jon's Name
+\newcommand{\jon}{J\'{o}n }
+
 \title{Great Depression}
 \subject{ECON W3213 Spring 2014 \jon Steinsson}
 \author{Linan Qiu, lq2137}
+
 \begin{document}
 
 \maketitle
@@ -43,6 +52,736 @@ However, Bernanke (he's kind of a big shot) identified four factors
 We shall look at the second in particular detail because we can analyze them using very simple game theory. This is probably one of the only set of notes that have little to no math, so rejoice if you will. Pfft.
 
 Side note, if you don't know what the Great Depression is, wiki\footnote{\url{http://en.wikipedia.org/wiki/Great_depression}} it. And no, the Great Depression is not your finals week.
+
+\section{Tight Monetary Policy in 1928 to 1929}
+
+In short, people got paranoid. It was occupy Wall Street mixed with Francophobia. People were worrying about excesses on Wall Street and the outflow of gold to France (remember what outflow of gold does during the gold standard? If not, check the previous set of notes.)
+
+The Federal Reserve tightened monetary policy under conditions that didn't usually warrant tight policy. In fact,
+
+\begin{itemize}
+\item There was no uncontrolled and high inflation
+\item Output was still recovering from the depths of 1927
+\end{itemize}
+
+This paranoia eventually led to an uncalled for slowdown of the economy and the Wall Street crash of October 1929.
+
+\section{Sterling Crisis}
+
+\subsection{Simplified Currency Run Model}
+
+We'll spend a little more time on this part. Now how does a run on the gold standard happen to a specific country? 
+
+Imagine two countries, Singapore and USA again. Now again assume that both are on the gold standard. Let's say that gold keeps flowing from Singapore to USA because I keep importing Insomnia cookies. Singapore's $M_g$, amount of gold stock, decreases. This will cause $M$ to fall unless the government of Singapore plays with the GCR. That's cool, but the only problem is that \textbf{governments are not allowed to alter the GCR drastically. In fact, there is a stipulated lower bound to the GCR.} Hence, the government of Singapore can choose to either maintain the gold standard (at great cost to its economy) or simply abandon the gold standard. 
+
+What happens when Singapore abandons the gold standard? Well, think of this first. \textbf{The value of a country's currency is determined by its GCR}. So say
+
+\begin{itemize}
+\item Singapore's GCR is 2. This means that there are 2 units of gold for every Singapore Dollar (SGD).
+\item USA's GCR is 3. This means that there are 3 units of gold for every US Dollar (USD)
+\end{itemize}
+
+This implies that the exchange rate between SGD and USD is 2SGD to 3USD. This comes from the GCR of each country.
+
+That is all good, but if Singapore's $M_g$ keeps dropping, the Singapore government has an incentive to drop the gold standard all together. When that happens, the SGD "floats." It is no longer bound to gold. Hence it is no longer fixed at 2:3. In fact, SGD should be cheaper relative to USD. It should be somewhere around 4SGD to 3USD, or even more depending on circumstances. This is because the 4:3 exchange rate is the actual underlying market exchange rate. However, 4:3 did not prevail because the gold standard fixes the exchange rate system. We can think of the 4:3 as a "shadow exchange rate."
+
+When this is the case, a sneaky investor can short the SGD when the Singapore government is nearly about the tap out. Then, when the Singapore government actually taps out, the SGD will suddenly jump from 2SGD:3USD to 4SGD:3USD. He will make a huge profit! 
+
+On the other hand, if the Singapore government doesn't let go of the gold standard, and instead strengthens the currency (and manages to convince every other investor that Singapore is safe), our sneaky investor betting on Singapore's downfall will lose money instead. 
+
+Now instead of telling this long tale, we can simplify this using game theory.
+
+\subsection{Solving Dynamic Games (An Informal but Practical Introduction)}
+
+I assume that you already have a basic knowledge of how to solve \textbf{static games}. For example, this is a prisoner's dilemma. Imagine that you and I are taking a test together and we're graded against each other. Now if we both cheat and bring in our phones (and use it to check for answers during the exam), we both take the risk of getting caught. If we both don't cheat, we don't have that risk. However, if one of us cheats, that person has an insane advantage over the other.
+
+\begin{figure}[H]
+\centering
+\begin{tabular}{rrcc}
+& & \multicolumn{2}{c}{\textbf{You}} \\
+& & Cheat & No Cheat \\ 
+\cline{3-4}
+\multirow{2}{*}{\textbf{Me}} & \multicolumn{1}{c|}{Cheat} & \multicolumn{1}{c|}{Me: 6, You: 6} & \multicolumn{1}{c|}{Me: 10, You: 2} \\
+\cline{3-4}
+& \multicolumn{1}{r|}{No Cheat} & \multicolumn{1}{c|}{Me: 2, You: 10} & \multicolumn{1}{c|}{Me: 8, You: 8} \\
+\cline{3-4}
+\end{tabular}
+\caption{Prisoner's Dilemma Static}
+\end{figure}
+
+It should be clear to you that the \textbf{Nash equilibrium} is the upper left corner where we both cheat.
+
+Let's analyze this in a different way. Previously, we assume that we both move at the same time; we both decide whether or not to cheat simultaneously. Ssuppose you do you first, then I do me based on what you did.
+
+% Set the overall layout of the tree
+\tikzstyle{level 1}=[level distance=3.5cm, sibling distance=4cm]
+\tikzstyle{level 2}=[level distance=3.5cm, sibling distance=2cm]
+\tikzstyle{level 3}=[level distance=3.5cm, sibling distance=1cm]
+
+% Define styles for bags and leafs
+\tikzstyle{player} = [text width=4em, text centered]
+\tikzstyle{end} = [circle, minimum width=3pt,fill, inner sep=0pt]
+
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}[grow=right, sloped]
+\node[player] {Me}
+    child {
+        node[player] {You}        
+            child {
+                node[end, label=right:
+                    {(8, 8)}] {}
+                edge from parent
+                node[above] {No Cheat}
+            }
+            child {
+                node[end, label=right:
+                    {(4, 10)}] {}
+                edge from parent
+                node[above] {Cheat}
+            }
+            edge from parent 
+            node[above] {No Cheat}
+    }
+    child {
+        node[player] {You}        
+        child {
+                node[end, label=right:
+                    {(10, 4)}] {}
+                edge from parent
+                node[above] {No Cheat}
+            }
+            child {
+                node[end, label=right:
+                    {(6, 6)}] {}
+                edge from parent
+                node[above] {Cheat}
+            }
+        edge from parent         
+            node[above] {Cheat}
+    }
+;
+\end{tikzpicture}
+\caption{Prisoner's Dilemma Dynamic (1)}
+\end{figure}
+
+The resulting values are in the order (Me, You). Let's try and solve this.
+
+Since I'm going first, you'd be thinking
+
+\begin{itemize}
+\item "\textbf{If he cheats}, what am I going to do?"
+\item "\textbf{If he doesn't cheat}, what am I going to do?"
+\end{itemize}
+
+In the diagram, this means that you'd be wondering what you'd do at each of the two branches here.
+
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}[grow=right, sloped]
+\node[player] {Me}
+    child {
+        node[player] {\textbf{\underline{You}}}        
+            child {
+                node[end, label=right:
+                    {(8, 8)}] {}
+                edge from parent
+                node[above] {\textbf{\underline{No Cheat}}}
+            }
+            child {
+                node[end, label=right:
+                    {(4, 10)}] {}
+                edge from parent
+                node[above] {\textbf{\underline{Cheat}}}
+            }
+            edge from parent 
+            node[above] {No Cheat}
+    }
+    child {
+        node[player] {\textbf{\underline{You}}}        
+        child {
+                node[end, label=right:
+                    {(10, 4)}] {}
+                edge from parent
+                node[above] {\textbf{\underline{No Cheat}}}
+            }
+            child {
+                node[end, label=right:
+                    {(6, 6)}] {}
+                edge from parent
+                node[above] {\textbf{\underline{Cheat}}}
+            }
+        edge from parent         
+            node[above] {Cheat}
+    }
+;
+\end{tikzpicture}
+\caption{Prisoner's Dilemma Dynamic (2)}
+\end{figure}
+
+Specifically, let's consider the first case where I'm cheating.
+
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}[grow=right, sloped]
+\node[player] {Me}
+    child {
+        node[player] {You}        
+            child {
+                node[end, label=right:
+                    {(8, 8)}] {}
+                edge from parent
+                node[above] {No Cheat}
+            }
+            child {
+                node[end, label=right:
+                    {(4, 10)}] {}
+                edge from parent
+                node[above] {Cheat}
+            }
+            edge from parent 
+            node[above] {No Cheat}
+    }
+    child {
+        node[player] {\textbf{\underline{You}}}        
+        child {
+                node[end, label=right:
+                    {(10, 4)}] {}
+                edge from parent
+                node[above] {\textbf{\underline{No Cheat}}}
+            }
+            child {
+                node[end, label=right:
+                    {(6, 6)}] {}
+                edge from parent
+                node[above] {\textbf{\underline{Cheat}}}
+            }
+        edge from parent         
+            node[above] {Cheat}
+    }
+;
+\end{tikzpicture}
+\caption{Prisoner's Dilemma Dynamic (3)}
+\end{figure}
+
+Now if I cheat, your best plan of action (or what game theorists call strategy) is to \textbf{cheat}, since given that I'm already cheating, you cheating gives you 6 utility, but not cheating gives you 4. So let's strike no cheating out, since you'd never go there.
+
+Now let's consider the other possibility of me not cheating.
+
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}[grow=right, sloped]
+\node[player] {Me}
+    child {
+        node[player] {\textbf{\underline{You}}}        
+            child {
+                node[end, label=right:
+                    {(8, 8)}] {}
+                edge from parent
+                node[above] {\textbf{\underline{No Cheat}}}
+            }
+            child {
+                node[end, label=right:
+                    {(4, 10)}] {}
+                edge from parent
+                node[above] {\textbf{\underline{Cheat}}}
+            }
+            edge from parent 
+            node[above] {No Cheat}
+    }
+    child {
+        node[player] {You}        
+        child {
+                node[end, label=right:
+                    {\sout{(10, 4)}}] {}
+                edge from parent
+                node[above] {\sout{No Cheat}}
+            }
+            child {
+                node[end, label=right:
+                    {(6, 6)}] {}
+                edge from parent
+                node[above] {Cheat}
+            }
+        edge from parent         
+            node[above] {Cheat}
+    }
+;
+\end{tikzpicture}
+\caption{Prisoner's Dilemma Dynamic (4)}
+\end{figure}
+
+In this case, if I'm not cheating, your best plan of action is to cheat because you gain 10 utility from cheating, but only 8 from not cheating.
+
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}[grow=right, sloped]
+\node[player] {Me}
+    child {
+        node[player] {You}        
+            child {
+                node[end, label=right:
+                    {\sout{(8, 8)}}] {}
+                edge from parent
+                node[above] {\sout{No Cheat}}
+            }
+            child {
+                node[end, label=right:
+                    {(4, 10)}] {}
+                edge from parent
+                node[above] {Cheat}
+            }
+            edge from parent 
+            node[above] {No Cheat}
+    }
+    child {
+        node[player] {You}        
+        child {
+                node[end, label=right:
+                    {\sout{(10, 4)}}] {}
+                edge from parent
+                node[above] {\sout{No Cheat}}
+            }
+            child {
+                node[end, label=right:
+                    {(6, 6)}] {}
+                edge from parent
+                node[above] {Cheat}
+            }
+        edge from parent         
+            node[above] {Cheat}
+    }
+;
+\end{tikzpicture}
+\caption{Prisoner's Dilemma Dynamic (5)}
+\end{figure}
+
+Now time for me to make a decision. I know that if I cheat, you'll cheat, and if I don't cheat, you'll still cheat. So my best plan of action is to cheat, since I get 6 utility from cheating, and 4 from not cheating.
+
+So since I'm making a decision first, I'll choose to cheat.
+
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}[grow=right, sloped]
+\node[player] {Me}
+    child {
+        node[player] {You}        
+            child {
+                node[end, label=right:
+                    {\sout{(8, 8)}}] {}
+                edge from parent
+                node[above] {\sout{No Cheat}}
+            }
+            child {
+                node[end, label=right:
+                    {(4, 10)}] {}
+                edge from parent
+                node[above] {Cheat}
+            }
+            edge from parent 
+            node[above] {No Cheat}
+    }
+    child {
+        node[player] {You}        
+        child {
+                node[end, label=right:
+                    {\sout{(10, 4)}}] {}
+                edge from parent
+                node[above] {\sout{No Cheat}}
+            }
+            child {
+                node[end, label=right:
+                    {\textbf{\underline{(6, 6)}}}] {}
+                edge from parent
+                node[above] {Cheat}
+            }
+        edge from parent         
+            node[above] {Cheat}
+    }
+;
+\end{tikzpicture}
+\caption{Prisoner's Dilemma Dynamic (6)}
+\end{figure}
+
+We find that we arrive at the same conclusion as earlier. But this doesn't always happen! Consider this static game (often referred to as battle of the sexes). Let's say that I'm trying to go out on a date with my girlfriend. I prefer the philharmonic while she the museum (because she falls asleep during Rachmaninoffs). However, we both prefer to go to the same place rather than different ones. If we are not allowed to talk/discuss/quarrel about this, where should we go?
+
+\begin{figure}[H]
+\centering
+\begin{tabular}{rrcc}
+& & \multicolumn{2}{c}{\textbf{Girlfriend}} \\
+& & Philharmonic & Met Museum \\ 
+\cline{3-4}
+\multirow{2}{*}{\textbf{Me}} & \multicolumn{1}{c|}{Philharmonic} & \multicolumn{1}{c|}{Me: 3, Her: 2} & \multicolumn{1}{c|}{Me: 0, Her: 0} \\
+\cline{3-4}
+& \multicolumn{1}{r|}{Met Museum} & \multicolumn{1}{c|}{Me: 0, Her: 0} & \multicolumn{1}{c|}{Me: 2, Her: 3} \\
+\cline{3-4}
+\end{tabular}
+\caption{Battle of the Sexes Static}
+\end{figure}
+
+You'd find that there are \textbf{2 Nash equilibria} here, one where we both go to the philharmonic and the other where we both go to the museum. None dominates over another.
+
+Now there are several ways to resolve this which I'm sure my creative girlfriend can think of. For example, she can
+
+\begin{itemize}
+\item Make a puppy face at me and threaten to wail. Game theoretically, this means lowering my utility of going to the Philharmonic to the point that it is utility maximizing for me to go to the museum with her. 
+\item Promise to not talk to me for the entire day and the day after. Game theoretically, this again lowers my utility of going to the Philharmonic.
+\end{itemize}
+
+However, all of these depends on her credibility. Since she rarely carries through her commitment to cry or ignore me, these are not \textbf{credible threats} to me. 
+
+Instead, she can simply move first. Why?
+
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}[grow=right, sloped]
+\node[player] {Her}
+    child {
+        node[player] {Me}        
+            child {
+                node[end, label=right:
+                    {(3,2)}] {}
+                edge from parent
+                node[above] {Met Museum}
+            }
+            child {
+                node[end, label=right:
+                    {(0,0)}] {}
+                edge from parent
+                node[above] {Philharmonic}
+            }
+            edge from parent 
+            node[above] {Met Museum}
+    }
+    child {
+        node[player] {Me}        
+        child {
+                node[end, label=right:
+                    {(0,0)}] {}
+                edge from parent
+                node[above] {Met Museum}
+            }
+            child {
+                node[end, label=right:
+                    {(2,3)}] {}
+                edge from parent
+                node[above] {Philharmonic}
+            }
+        edge from parent         
+            node[above] {Philharmonic}
+    }
+;
+\end{tikzpicture}
+\caption{Battle of the Sexes Dynamic (1)}
+\end{figure}
+
+Using the same method we used earlier, she knows that if she goes to the philharmonic, I'll choose philharmonic. But if she chooses the Met, I'll go to the Met.
+
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}[grow=right, sloped]
+\node[player] {Her}
+    child {
+        node[player] {Me}        
+            child {
+                node[end, label=right:
+                    {(3,2)}] {}
+                edge from parent
+                node[above] {Met Museum}
+            }
+            child {
+                node[end, label=right:
+                    {\sout{(0,0)}}] {}
+                edge from parent
+                node[above] {Philharmonic}
+            }
+            edge from parent 
+            node[above] {Met Museum}
+    }
+    child {
+        node[player] {Me}        
+        child {
+                node[end, label=right:
+                    {\sout{(0,0)}}] {}
+                edge from parent
+                node[above] {Met Museum}
+            }
+            child {
+                node[end, label=right:
+                    {(2,3)}] {}
+                edge from parent
+                node[above] {Philharmonic}
+            }
+        edge from parent         
+            node[above] {Philharmonic}
+    }
+;
+\end{tikzpicture}
+\caption{Battle of the Sexes Dynamic (2)}
+\end{figure}
+
+Then between the Met and the Philharmonic, she'll choose the Met since the Met gives her higher utility over Philharmonic (3 over 2).
+
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}[grow=right, sloped]
+\node[player] {Her}
+    child {
+        node[player] {Me}        
+            child {
+                node[end, label=right:
+                    {\textbf{\underline{(3,2)}}}] {}
+                edge from parent
+                node[above] {Met Museum}
+            }
+            child {
+                node[end, label=right:
+                    {\sout{(0,0)}}] {}
+                edge from parent
+                node[above] {Philharmonic}
+            }
+        edge from parent 
+        node[above] {Met Museum}
+    }
+    child {
+        node[player] {Me}        
+        child {
+                node[end, label=right:
+                    {\sout{(0,0)}}] {}
+                edge from parent
+                node[above] {Met Museum}
+            }
+            child {
+                node[end, label=right:
+                    {(2,3)}] {}
+                edge from parent
+                node[above] {Philharmonic}
+            }
+        edge from parent         
+            node[above] {Philharmonic}
+    }
+;
+\end{tikzpicture}
+\caption{Battle of the Sexes Dynamic (3)}
+\end{figure}
+
+The fact that she goes first changes the entire game altogether. Instead of having 2 outcomes, we have only 1 outcome. We call this a \textbf{subgame perfect equilibrium}. She can ensure this outcome by simply purchasing tickets for the Met, or since we're Columbia students and we get in for free, she can just text me, "We're going to the Met. Period."
+
+\subsection{Speculative Attacks}
+
+Let's try and apply this to speculative attacks.
+
+% Redefine tree structure
+\tikzstyle{level 1}=[level distance=2.5cm, sibling distance=8cm]
+\tikzstyle{level 2}=[level distance=2.5cm, sibling distance=4cm]
+\tikzstyle{level 3}=[level distance=3.5cm, sibling distance=2cm]
+
+\begin{figure}[H] 
+\centering
+\begin{tikzpicture}[grow=down, sloped]
+\node[player] {Investor A}
+child {
+node[player] {Investor B}
+child {
+node[player] {Government}
+child {
+ node[end, label=below:{(1, 1, 1)}] {} 
+ edge from parent 
+ node[above] {Defend} 
+ }
+child {
+ node[end, label=below:{(0, 0, 0)}] {} 
+ edge from parent 
+ node[above] {Devalue} 
+ }
+edge from parent
+node[above] {Don't Run} 
+}
+child {
+node[player] {Government}
+child {
+ node[end, label=below:{(1, -1, -2)}] {} 
+ edge from parent 
+ node[above] {Defend} 
+ }
+child {
+ node[end, label=below:{(-1, 0, -1)}] {} 
+ edge from parent 
+ node[above] {Devalue} 
+ }
+edge from parent
+node[above] {Run} 
+}
+edge from parent
+node[above] {Don't Run} 
+}
+child {
+node[player] {Investor B}
+child {
+node[player] {Government}
+child {
+ node[end, label=below:{(-1, 1, -2)}] {} 
+ edge from parent 
+ node[above] {Defend} 
+ }
+child {
+ node[end, label=below:{(0, -1, -1)}] {} 
+ edge from parent 
+ node[above] {Devalue} 
+ }
+edge from parent
+node[above] {Don't Run} 
+}
+child {
+node[player] {Government}
+child {
+ node[end, label=below:{(-1, -1, -3)}] {} 
+ edge from parent 
+ node[above] {Defend} 
+ }
+child {
+ node[end, label=below:{(0, 0, 2)}] {} 
+ edge from parent 
+ node[above] {Devalue} 
+ }
+edge from parent
+node[above] {Run} 
+}
+edge from parent
+node[above] {Run} 
+};
+\draw[dashed,rounded corners=15] (-5,-3.1) rectangle(5,-1.9);
+\end{tikzpicture}
+\caption{Currency Attack Model (1)}
+\end{figure}
+
+This is simply an illustration of the story we told earlier (remember the one about Singapore and USA and the gold standard being a fixed exchange rate?)
+
+Let's see what happens here. There are two investors who act simultaneously. The little dashed rectangle around Investor B means that the investor doesn't know which node he is at. Intuitively, this means that Investor B doesn't act \textbf{after} Investor A does. In fact, he does not know what Investor A does. Hence, he must do the same on both nodes. We'll see what this means in a while.
+
+Let's see what the Government does in each situation. The reward matrix should be read (Investor A, Investor B, Government)
+
+\begin{itemize}
+\item $1>0$, If both investors don't run, the government defends. (no shit) 
+\item $-2 < -1$, If A doesn't run and B runs, the government devalues because defending it (and suffering deflation and output loss isn't worth it) 
+\item $-2<-1$, If A runs and B doesn't run, the government devalues too
+\item $-3 < 2$, If both runs, the government bails and devalues.
+\end{itemize}
+
+So let's strike out the nodes that won't happen.
+
+\begin{figure}[H] 
+\centering
+\begin{tikzpicture}[grow=down, sloped]
+\node[player] {Investor A}
+child {
+node[player] {Investor B}
+child {
+node[player] {Government}
+child {
+ node[end, label=below:{(1, 1, 1)}] {} 
+ edge from parent 
+ node[above] {Defend} 
+ }
+child {
+ node[end, label=below:{\sout{(0, 0, 0)}}] {} 
+ edge from parent 
+ node[above] {Devalue} 
+ }
+edge from parent
+node[above] {Don't Run} 
+}
+child {
+node[player] {Government}
+child {
+ node[end, label=below:{\sout{(1, -1, -2)}}] {} 
+ edge from parent 
+ node[above] {Defend} 
+ }
+child {
+ node[end, label=below:{(-1, 0, -1)}] {} 
+ edge from parent 
+ node[above] {Devalue} 
+ }
+edge from parent
+node[above] {Run} 
+}
+edge from parent
+node[above] {Don't Run} 
+}
+child {
+node[player] {Investor B}
+child {
+node[player] {Government}
+child {
+ node[end, label=below:{\sout{(-1, 1, -2)}}] {} 
+ edge from parent 
+ node[above] {Defend} 
+ }
+child {
+ node[end, label=below:{(0, -1, -1)}] {} 
+ edge from parent 
+ node[above] {Devalue} 
+ }
+edge from parent
+node[above] {Don't Run} 
+}
+child {
+node[player] {Government}
+child {
+ node[end, label=below:{\sout{(-1, -1, -3)}}] {} 
+ edge from parent 
+ node[above] {Defend} 
+ }
+child {
+ node[end, label=below:{(0, 0, 2)}] {} 
+ edge from parent 
+ node[above] {Devalue} 
+ }
+edge from parent
+node[above] {Run} 
+}
+edge from parent
+node[above] {Run} 
+};
+\draw[dashed,rounded corners=15] (-5,-3.1) rectangle(5,-1.9);
+\end{tikzpicture}
+\caption{Currency Attack Model (2)}
+\end{figure}
+
+Now Investor B thinks this way
+
+\begin{itemize}
+\item $1>0$ If A doesn't run, B doesn't run too
+\item $-1 < 0$ If A runs, B runs as well.
+\end{itemize}
+
+The problem is that B doesn't know what A is doing. This is a very accurate reflection of reality, since you never know if the rest of the "market", or all the other investors, is going to run on a currency or conduct some other speculative attack.
+
+If B knew precisely what A was doing (as in the case of a coordinated attack), then the only outcome will be to run on the government for both investors. We will simply solve this game the normal way.
+
+However, B is left in a state of uncertainty. In that case, we can't solve this game further. We leave it at this state and say
+
+\begin{enumerate}
+\item Government devalues if both A and B runs, or if either one of them runs
+\item Government defends if neither of them runs
+\end{enumerate}
+
+This is not really a good conclusion. We aren't saying much. So let's try tweaking some of the numbers to answer the question "Under what condition will the government's behavior change?"
+
+Well intuitively we know that if the government can commit strongly to defending its currency, people will tend to attack it less. 
+
+Think of it as a robbery. There are 20 small muggers and 1  Russian ex-Spetznaz. Now if they attack the Spetznaz all at the same time, they'll probably win. But if only one of or a few of them attacks, they don't win the Spetznaz. Thing is our Spetznaz kind of looks small and weak, so it is very likely that all 20 of them will jump on him at the same time. If the Spetznaz can somehow demonstrate that he can take on at least one of them successfully, it is far less likely for all of them to jump on him. So our Spetznaz will probably pull out a badge, start attacking one of them first etc. to show that he can indeed win a few of them. The rest of them gets scared and decides to not attack him.
+
+I know I'm bad at story telling, but that's the same gist as governments and currencies. If the government can demonstrate that it can defend against small currency attacks, investors will be less likely to attack.
+
+Let's show this in our graph by lowering the cost for a government to defend against "small" runs (ie. only either A or B attacks).
+
+
+
+
+
+
 
 
 \end{document}

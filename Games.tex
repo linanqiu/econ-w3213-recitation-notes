@@ -1,0 +1,79 @@
+\documentclass{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[english]{babel}
+\usepackage{sgame}
+\usepackage{float}
+\usepackage{subfig}
+\usepackage{tikz}
+\usetikzlibrary{calc}
+
+\title{Game theory in \LaTeX}
+\date{}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+\maketitle
+
+\begin{figure}[H]
+\centering
+\begin{game}{2}{2}[$P1$][$P2$][$M1$]
+	    & $L$                 & $R$               \\
+	$U$ & $-1, 1$             & $0, \phantom{-}0$ \\
+	$D$ & $\phantom{-} 0, 0$  & $1, -1$ 
+\end{game}
+\hspace*{2em}
+\begin{game}{2}{2}[$P1$][$P2$][$M2$]
+	    & $L$                 & $R$               \\
+	$U$ & $-2, 2$             & $0, \phantom{-}0$ \\
+	$D$ & $\phantom{-} 0, 0$  & $2, -2$ 
+\end{game}
+\\
+\vspace*{1em}
+\centerline{$P3$}
+\caption{Strategic form game.}
+\end{figure}
+
+	% Node styles
+	\tikzset{
+	% Two node styles for game trees: solid and hollow
+	solid node/.style={circle,draw,inner sep=1.5,fill=black},
+	hollow node/.style={circle,draw,inner sep=1.5}
+	}
+
+\begin{figure}[H]
+	\centering
+	\begin{tikzpicture}[scale=1.5,font=\footnotesize]
+	% Specify spacing for each level of the tree
+	\tikzstyle{level 1}=[level distance=15mm,sibling distance=40mm]
+	\tikzstyle{level 2}=[level distance=15mm,sibling distance=22mm]
+	\tikzstyle{level 3}=[level distance=15mm,sibling distance=15mm]
+	% The Tree
+	\node(0)[solid node,label=above:{$P1$}]{}
+	child{node(1)[solid node]{}
+		child{node[hollow node,label=below:{$(a,b)$}]{} edge from parent node[left]{$C$}}
+		child{node(3)[solid node,label=right:{$P1$}]{} 
+			child{node(4)[hollow node,label=below:{$(0,0)$}]{} edge from parent node[left]{$E$}}
+			child{node(5)[hollow node,label=below:{$(10,10)$}]{} edge from parent node[right]{$F$}}
+			edge from parent node[right]{$D$}}
+		edge from parent node[left,xshift=-3]{$A$}
+	}
+	child{node(2)[solid node]{}
+		child{node[hollow node,label=below:{$(e,f)$}]{} edge from parent node[left]{$C$}}
+		child{node[hollow node,label=below:{$(g,h)$}]{} edge from parent node[right]{$D$}}
+		edge from parent node[right,xshift=3]{$B$}
+	};
+	% information set
+	\draw[dashed,rounded corners=10]($(1) + (-.2,.25)$)rectangle($(2) +(.2,-.25)$);
+	% Subgame
+	\draw[dotted, thick, red, rounded corners=15]($(4) + (-.4,1.75)$)rectangle($(5) +(.4,-.5)$);
+	% specify mover at 2nd information set
+	\node at ($(1)!.5!(2)$) {$P2$};
+	\end{tikzpicture}
+	\caption{Extensive form game.}
+\end{figure}
+
+\end{document}
