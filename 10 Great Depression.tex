@@ -777,11 +777,239 @@ I know I'm bad at story telling, but that's the same gist as governments and cur
 
 Let's show this in our graph by lowering the cost for a government to defend against "small" runs (ie. only either A or B attacks).
 
+\begin{figure}[H] 
+\centering
+\begin{tikzpicture}[grow=down, sloped]
+\node[player] {Investor A}
+child {
+node[player] {Investor B}
+child {
+node[player] {Government}
+child {
+ node[end, label=below:{(1, 1, 1)}] {} 
+ edge from parent 
+ node[above] {Defend} 
+ }
+child {
+ node[end, label=below:{(0, 0, 0)}] {} 
+ edge from parent 
+ node[above] {Devalue} 
+ }
+edge from parent
+node[above] {Don't Run} 
+}
+child {
+node[player] {Government}
+child {
+ node[end, label=below:{\underline{(1, -1, 0)}}] {} 
+ edge from parent 
+ node[above] {Defend} 
+ }
+child {
+ node[end, label=below:{(-1, 0, -1)}] {} 
+ edge from parent 
+ node[above] {Devalue} 
+ }
+edge from parent
+node[above] {Run} 
+}
+edge from parent
+node[above] {Don't Run} 
+}
+child {
+node[player] {Investor B}
+child {
+node[player] {Government}
+child {
+ node[end, label=below:{\underline{(-1, 1, 0)}}] {} 
+ edge from parent 
+ node[above] {Defend} 
+ }
+child {
+ node[end, label=below:{(0, -1, -1)}] {} 
+ edge from parent 
+ node[above] {Devalue} 
+ }
+edge from parent
+node[above] {Don't Run} 
+}
+child {
+node[player] {Government}
+child {
+ node[end, label=below:{(-1, -1, -3)}] {} 
+ edge from parent 
+ node[above] {Defend} 
+ }
+child {
+ node[end, label=below:{(0, 0, 2)}] {} 
+ edge from parent 
+ node[above] {Devalue} 
+ }
+edge from parent
+node[above] {Run} 
+}
+edge from parent
+node[above] {Run} 
+};
+\draw[dashed,rounded corners=15] (-5,-3.1) rectangle(5,-1.9);
+\end{tikzpicture}
+\caption{Currency Attack Model (3)}
+\end{figure}
 
+The changes are underlined. This reflects a lower cost of defending. What then happens is that the government choose to defend unless both runs.
 
+\begin{figure}[H] 
+\centering
+\begin{tikzpicture}[grow=down, sloped]
+\node[player] {Investor A}
+child {
+node[player] {Investor B}
+child {
+node[player] {Government}
+child {
+ node[end, label=below:{(1, 1, 1)}] {} 
+ edge from parent 
+ node[above] {Defend} 
+ }
+child {
+ node[end, label=below:{\sout{(0, 0, 0)}}] {} 
+ edge from parent 
+ node[above] {Devalue} 
+ }
+edge from parent
+node[above] {Don't Run} 
+}
+child {
+node[player] {Government}
+child {
+ node[end, label=below:{\underline{(1, -1, 0)}}] {} 
+ edge from parent 
+ node[above] {Defend} 
+ }
+child {
+ node[end, label=below:{\sout{(-1, 0, -1)}}] {} 
+ edge from parent 
+ node[above] {Devalue} 
+ }
+edge from parent
+node[above] {Run} 
+}
+edge from parent
+node[above] {Don't Run} 
+}
+child {
+node[player] {Investor B}
+child {
+node[player] {Government}
+child {
+ node[end, label=below:{\underline{(-1, 1, 0)}}] {} 
+ edge from parent 
+ node[above] {Defend} 
+ }
+child {
+ node[end, label=below:{\sout{(0, -1, -1)}}] {} 
+ edge from parent 
+ node[above] {Devalue} 
+ }
+edge from parent
+node[above] {Don't Run} 
+}
+child {
+node[player] {Government}
+child {
+ node[end, label=below:{\sout{(-1, -1, -3)}}] {} 
+ edge from parent 
+ node[above] {Defend} 
+ }
+child {
+ node[end, label=below:{(0, 0, 2)}] {} 
+ edge from parent 
+ node[above] {Devalue} 
+ }
+edge from parent
+node[above] {Run} 
+}
+edge from parent
+node[above] {Run} 
+};
+\draw[dashed,rounded corners=15] (-5,-3.1) rectangle(5,-1.9);
+\end{tikzpicture}
+\caption{Currency Attack Model (2)}
+\end{figure}
 
+Now we can see that the government always defends unless both of them runs. This means that if either one of them runs, the government will still defend. The outcomes are tilted way more in the government's favor.
 
+Whether we end up in the earlier situation or this one depends on the government's credibility. If the government is known for defending its currency ardently, then even if the exchange rate falls for some reason, speculators will rush to support it (thinking that the government will still uphold and defend the exchange rate). In other words, the actions of the speculators reinforce that of the defending government. It actually makes the government's job easier.
 
+On the other hand, if the government has low credibility (say it has devalued its currency in history) then speculators will instead bet \textbf{against} the government, making the government's cost of defending much higher and a default much more likely.
 
+What actually happened was that governments after governments suffered runs, and people were not likely to believe that governments will uphold the gold standard. Most countries bailed. The US government didn't, and successfully defended the currency but at a very very high cost.
+
+\subsection{Bank Bailouts}
+
+At the same time, Credit-Anstalt in Austria asked for a bank bail out. The Austrian government granted the bank the bail out even though it will cost significant amounts of taxpayer money. Why?
+
+We can analyze this using game theory as well.
+
+% Redefine tree structure
+\tikzstyle{level 1}=[level distance=4cm, sibling distance=4cm]
+\tikzstyle{level 2}=[level distance=4cm, sibling distance=4cm]
+\tikzstyle{level 3}=[level distance=4cm, sibling distance=4cm]
+
+\begin{figure}[H] 
+\centering
+\begin{tikzpicture}[grow=right, sloped]
+\node[player] {Bank}
+child {
+ node[end, label=right:{(3, 1)}] {} 
+ edge from parent 
+ node[above] {Low Risk} 
+ }
+child {
+node[player] {"Nature"}
+child {
+ node[end, label=right:{(5, 1)}] {} 
+ edge from parent 
+ node[above] {Good Shock}
+ node[below] {$p=0.75$}
+ }
+child {
+node[player] {Government}
+child {
+ node[end, label=right:{(-4 -4)}] {} 
+ edge from parent 
+ node[above] {No Bail Out} 
+ }
+child {
+ node[end, label=right:{(0, -1)}] {} 
+ edge from parent 
+ node[above] {Bail Out} 
+ }
+edge from parent
+node[above] {Bad Shock} 
+node[below] {$1-p = 0.25$}
+}
+edge from parent
+node[above] {High Risk} 
+};
+\end{tikzpicture}
+\caption{Bank Bail Out Game}
+\end{figure}
+
+Solving from the end of the government, we know that the government will bail out when a bad shock happens after the bank conducts high risk investments. Hence, a government's promise of "not bailing out the wealthy 1\% on Wall Street" is never a credible promise. The banks know this and hence conducts high risk investments. 
+
+How can a government resolve this? Well, surprisingly, it can target banks that perform spectacularly well. After all, high returns only accrue to those who take dangerous risks (and does well.) In fact, try this with your money managers when you're rich. If you tell them to invest safely and they come back to you with "good news" of returns of over 20\%, you know that they have been gambling with your money because low risk investments simply don't return that much. Similarly, governments can target banks that make spectacular returns.
+
+Of course that may disincentivize profit making in the first place. This issue is not trivial. However, this game theory model does allow us to understand why the promise of "no bail out" is never a credible one.
+
+\section{Easing in Spring of 1932}
+
+Congress tried to improve the situation in April 1932 by influencing the fed to ease monetary policy. The Fed budged a little and bought up government bonds (hence increasing the amount of money in circulation). This improved the economy a little, but when the congress adjourned in July, the Fed stopped injecting money.
+
+\section{Run on Dollar}
+
+Between the election of Roosevelt in November 1932 and his assuming office in March 1933, there was much speculation about whether Roosevelt would devalue the dollar. This led to a slow run on the dollar and the banks.
+
+This only stopped when Roosevelt took office, declares a bank holiday (effectively putting the dangerous and soon to be bankrupt banks on a mandatory vacation), takes US off the gold standard and allows the dollar to devalue substantially. Effectively, he decided to not pay the price of defending the dollar (and the gold standard) anymore. Then he expands governments spending massively and introduces an explicit policy of increasing price levels. We know what happens thereafter both theoretically and historically.
 
 \end{document}
